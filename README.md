@@ -195,26 +195,26 @@ Path: /tasks
 Request Body:
 
 
-  "userID": "string",
-  "title": "string",
-  "description": "string",
-  "priority": "string",
-  "dueDate": "string",
-  "points": "number"
+    "userID": "string",
+    "title": "string",
+    "description": "string",
+    "priority": "string",
+    "dueDate": "string",
+    "points": "number"
 
 
 Response Body:
 
 
-  "taskID": "string",
-  "userID": "string",
-  "title": "string",
-  "description": "string",
-  "priority": "string",
-  "dueDate": "string",
-  "completionStatus": "string",
-  "createdAt": "string",
-  "points": "number"
+    "taskID": "string",
+    "userID": "string",
+    "title": "string",
+    "description": "string",
+    "priority": "string",
+    "dueDate": "string",
+    "completionStatus": "string",
+    "createdAt": "string",
+    "points": "number"
 
 
 Errors:
@@ -234,26 +234,26 @@ Path Parameters:
 Request Body:
 
 
-  "title": "string",
-  "description": "string",
-  "priority": "string",
-  "dueDate": "string",
-  "completionStatus": "string"
+    "title": "string",
+    "description": "string",
+    "priority": "string",
+    "dueDate": "string",
+    "completionStatus": "string"
 
 
 Response Body:
 
 
-  "taskID": "string",
-  "userID": "string",
-  "title": "string",
-  "description": "string",
-  "priority": "string",
-  "dueDate": "string",
-  "completionStatus": "string",
-  "createdAt": "string",
-  "completedAt": "string",
-  "points": "number"
+    "taskID": "string",
+    "userID": "string",
+    "title": "string",
+    "description": "string",
+    "priority": "string",
+    "dueDate": "string",
+    "completionStatus": "string",
+    "createdAt": "string",
+    "completedAt": "string",
+    "points": "number"
 
 
 Errors:
@@ -274,7 +274,7 @@ Path Parameters:
 Response Body:
 
 
-  "status": "string"
+    "status": "string"
 
 
 Errors:
@@ -294,16 +294,16 @@ Path Parameters:
 Response Body:
 
 
-  "taskID": "string",
-  "userID": "string",
-  "title": "string",
-  "description": "string",
-  "priority": "string",
-  "dueDate": "string",
-  "completionStatus": "string",
-  "createdAt": "string",
-  "completedAt": "string",
-  "points": "number"
+    "taskID": "string",
+    "userID": "string",
+    "title": "string",
+    "description": "string",
+    "priority": "string",
+    "dueDate": "string",
+    "completionStatus": "string",
+    "createdAt": "string",
+    "completedAt": "string",
+    "points": "number"
 
 
 Errors:
@@ -320,16 +320,16 @@ Path: /tags
 Request Body:
 
 
-  "userID": "string",
-  "name": "string"
+    "userID": "string",
+    "name": "string"
 
 
 Response Body:
 
 
-  "tagID": "string",
-  "userID": "string",
-  "name": "string"
+    "tagID": "string",
+    "userID": "string",
+    "name": "string"
 
 
 Errors:
@@ -349,15 +349,15 @@ Path Parameters:
 Request Body:
 
 
-  "tagID": "string"
+    "tagID": "string"
 
 
 Response Body:
 
 
-  "taskTagID": "string",
-  "taskID": "string",
-  "tagID": "string"
+    "taskTagID": "string",
+    "taskID": "string",
+    "tagID": "string"
 
 
 Errors:
@@ -378,10 +378,8 @@ Path Parameters:
 
 Response Body:
 
-json
 
-
-  "status": "string"
+    "status": "string"
 
 
 Errors:
@@ -397,18 +395,18 @@ Path: /rewards
 Request Body:
 
 
-  "name": "string",
-  "description": "string",
-  "pointsRequired": "number"
+    "name": "string",
+    "description": "string",
+    "pointsRequired": "number"
 
 
 Response Body:
 
 
-  "rewardID": "string",
-  "name": "string",
-  "description": "string",
-  "pointsRequired": "number"
+    "rewardID": "string",
+    "name": "string",
+    "description": "string",
+    "pointsRequired": "number"
 
 
 Errors:
@@ -424,17 +422,17 @@ Path: /rewards/redeem
 Request Body:
 
 
-  "userID": "string",
-  "rewardID": "string"
+    "userID": "string",
+    "rewardID": "string"
 
 
 Response Body:
 
 
-  "userRewardID": "string",
-  "userID": "string",
-  "rewardID": "string",
-  "redeemedAt": "string"
+    "userRewardID": "string",
+    "userID": "string",
+    "rewardID": "string",
+    "redeemedAt": "string"
 
 
 Errors:
@@ -451,19 +449,19 @@ Path: /focus-sessions/start
 Request Body:
 
 
-  "userID": "string",
-  "taskID": "string",
-  "startTime": "string"
+    "userID": "string",
+    "taskID": "string",
+    "startTime": "string"
 
 
 Response Body:
 
 
-  "sessionID": "string",
-  "userID": "string",
-  "taskID": "string",
-  "startTime": "string",
-  "duration": "number"
+    "sessionID": "string",
+    "userID": "string",
+    "taskID": "string",
+    "startTime": "string",
+    "duration": "number"
 
 
 Errors:
@@ -479,20 +477,20 @@ Path: /focus-sessions/end
 Request Body:
 
 
-  "sessionID": "string",
-  "endTime": "string"
+    "sessionID": "string",
+    "endTime": "string"
 
 
 Response Body:
 
 
-  "sessionID": "string",
-  "userID": "string",
-  "taskID": "string",
-  "startTime": "string",
-  "endTime": "string",
-  "duration": "number"
-
+    "sessionID": "string",
+    "userID": "string",
+    "taskID": "string",
+    "startTime": "string",
+    "endTime": "string",
+    "duration": "number"
+  
 
 Errors:
 
@@ -507,18 +505,18 @@ Path: /mood-logs
 Request Body:
 
 
-  "userID": "string",
-  "mood": "string",
-  "energyLevel": "string",
-  "loggedAt": "string"
+    "userID": "string",
+    "mood": "string",
+    "energyLevel": "string",
+    "loggedAt": "string"
 
 
 Response Body:
 
 
-  "moodLogID": "string",
-  "userID": "string",
-  "mood": "string",
-  "energyLevel": "string",
-  "loggedAt": "string"
-
+    "moodLogID": "string",
+    "userID": "string",
+    "mood": "string",
+    "energyLevel": "string",
+    "loggedAt": "string"
+  

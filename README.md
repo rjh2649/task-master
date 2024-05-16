@@ -194,16 +194,12 @@ HTTP Method: POST
 Path: /users/register
 Request Body:
 
-json
-
 {
   "email": "string",
   "password": "string"
 }
 
 Response Body:
-
-json
 
 {
   "userID": "string",
@@ -224,16 +220,12 @@ HTTP Method: POST
 Path: /users/login
 Request Body:
 
-json
-
 {
   "email": "string",
   "password": "string"
 }
 
 Response Body:
-
-json
 
 {
   "token": "string"
@@ -252,8 +244,6 @@ HTTP Method: POST
 Path: /tasks
 Request Body:
 
-json
-
 {
   "userID": "string",
   "title": "string",
@@ -264,8 +254,6 @@ json
 }
 
 Response Body:
-
-json
 
 {
   "taskID": "string",
@@ -295,8 +283,6 @@ Path Parameters:
 
 Request Body:
 
-json
-
 {
   "title": "string",
   "description": "string",
@@ -306,8 +292,6 @@ json
 }
 
 Response Body:
-
-json
 
 {
   "taskID": "string",
@@ -339,8 +323,6 @@ Path Parameters:
 
 Response Body:
 
-json
-
 {
   "status": "string"
 }
@@ -360,8 +342,6 @@ Path Parameters:
     taskID: ID of the task to complete.
 
 Response Body:
-
-json
 
 {
   "taskID": "string",
@@ -389,16 +369,12 @@ HTTP Method: POST
 Path: /tags
 Request Body:
 
-json
-
 {
   "userID": "string",
   "name": "string"
 }
 
 Response Body:
-
-json
 
 {
   "tagID": "string",
@@ -422,15 +398,11 @@ Path Parameters:
 
 Request Body:
 
-json
-
 {
   "tagID": "string"
 }
 
 Response Body:
-
-json
 
 {
   "taskTagID": "string",
@@ -474,8 +446,6 @@ HTTP Method: POST
 Path: /rewards
 Request Body:
 
-json
-
 {
   "name": "string",
   "description": "string",
@@ -483,8 +453,6 @@ json
 }
 
 Response Body:
-
-json
 
 {
   "rewardID": "string",
@@ -505,16 +473,12 @@ HTTP Method: POST
 Path: /rewards/redeem
 Request Body:
 
-json
-
 {
   "userID": "string",
   "rewardID": "string"
 }
 
 Response Body:
-
-json
 
 {
   "userRewardID": "string",
@@ -536,8 +500,6 @@ HTTP Method: POST
 Path: /focus-sessions/start
 Request Body:
 
-json
-
 {
   "userID": "string",
   "taskID": "string",
@@ -545,8 +507,6 @@ json
 }
 
 Response Body:
-
-json
 
 {
   "sessionID": "string",
@@ -568,16 +528,12 @@ HTTP Method: POST
 Path: /focus-sessions/end
 Request Body:
 
-json
-
 {
   "sessionID": "string",
   "endTime": "string"
 }
 
 Response Body:
-
-json
 
 {
   "sessionID": "string",
@@ -600,8 +556,6 @@ HTTP Method: POST
 Path: /mood-logs
 Request Body:
 
-json
-
 {
   "userID": "string",
   "mood": "string",
@@ -610,8 +564,6 @@ json
 }
 
 Response Body:
-
-json
 
 {
   "moodLogID": "string",

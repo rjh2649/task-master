@@ -38,3 +38,148 @@ As someone with ADHD, I find myself struggling to get things done in timely fash
   b. Filter tasks by tags
   c. Edit and delete tasks
 9. As a user, I'd like to share tasks with other users to either collaborate or provide mutual support. (This is probably more of a stretch, but not a bad idea either)
+
+# Rough Class Diagram
+![jLbBRzms4BxpLwW-zO44xTK8Z6nifosmpM7j77gK9OOMhCUMfBn8ZVxtajI37CwGAmUjBmiDFtBc6tAeR-JtIfTIZrtBs7Sr_zBql3ZSNj_lFlswlsNggUcFfIoxecfBfOeNLfY_3sNr9EGmzlNrq0xotRjzsJtKvSUnhtGpz5TNnRuHZ_fFthR3QPeno9hB5Ff3QnPqk9sKmyd1PkC_](https://github.com/rjh2649/task-master/assets/146969105/9a68ba9d-bbad-4a86-950b-b1bf010c81d3)
+
+# DynamoDB Tables
+
+1. Users Table
+Table Name: Users
+
+Purpose: To store user information and authentication details.
+
+Primary Key:
+
+    UserID (String) - Partition key
+
+Attributes:
+
+    UserID (String): Unique identifier for the user.
+    Email (String): User's email address.
+    PasswordHash (String): Hashed password for authentication.
+    Points (Number): Total points earned by the user.
+    RegisteredAt (String): Timestamp of when the user registered.
+
+2. Tasks Table
+Table Name: Tasks
+
+Purpose: To store information about user tasks.
+
+Primary Key:
+
+    TaskID (String) - Partition key
+
+Secondary Index:
+
+    UserID-CompletionStatus-index - To query tasks by user and completion status.
+
+Attributes:
+
+    TaskID (String): Unique identifier for the task.
+    UserID (String): Identifier of the user to whom the task belongs.
+    Title (String): Title of the task.
+    Description (String): Detailed description of the task.
+    Priority (String): Priority level of the task (e.g., High, Medium, Low).
+    DueDate (String): Due date of the task.
+    CompletionStatus (String): Status of the task (e.g., Pending, Completed).
+    CreatedAt (String): Timestamp of when the task was created.
+    CompletedAt (String): Timestamp of when the task was completed.
+    Points (Number): Points awarded upon completion of the task.
+
+3. Rewards Table
+Table Name: Rewards
+
+Purpose: To store information about available rewards and activities.
+
+Primary Key:
+
+    RewardID (String) - Partition key
+
+Attributes:
+
+    RewardID (String): Unique identifier for the reward.
+    Name (String): Name of the reward.
+    Description (String): Description of the reward.
+    PointsRequired (Number): Points required to redeem the reward.
+
+4. UserRewards Table
+Table Name: UserRewards
+
+Purpose: To track rewards redeemed by users.
+
+Primary Key:
+
+    UserRewardID (String) - Partition key
+
+Attributes:
+
+    UserRewardID (String): Unique identifier for the user-reward relationship.
+    UserID (String): Identifier of the user.
+    RewardID (String): Identifier of the reward.
+    RedeemedAt (String): Timestamp of when the reward was redeemed.
+
+5. Tags Table
+Table Name: Tags
+
+Purpose: To store tags for categorizing tasks.
+
+Primary Key:
+
+    TagID (String) - Partition key
+
+Attributes:
+
+    TagID (String): Unique identifier for the tag.
+    UserID (String): Identifier of the user who created the tag.
+    Name (String): Name of the tag.
+
+6. TaskTags Table
+Table Name: TaskTags
+
+Purpose: To associate tags with tasks.
+
+Primary Key:
+
+    TaskTagID (String) - Partition key
+
+Attributes:
+
+    TaskTagID (String): Unique identifier for the task-tag relationship.
+    TaskID (String): Identifier of the task.
+    TagID (String): Identifier of the tag.
+
+7. FocusSessions Table
+Table Name: FocusSessions
+
+Purpose: To store information about user's focus sessions.
+
+Primary Key:
+
+    SessionID (String) - Partition key
+
+Attributes:
+
+    SessionID (String): Unique identifier for the focus session.
+    UserID (String): Identifier of the user.
+    TaskID (String): Identifier of the task.
+    StartTime (String): Timestamp of when the session started.
+    EndTime (String): Timestamp of when the session ended.
+    Duration (Number): Duration of the session in minutes.
+
+8. MoodLogs Table
+Table Name: MoodLogs
+
+Purpose: To store user's mood and energy level logs.
+
+Primary Key:
+
+    MoodLogID (String) - Partition key
+
+Attributes:
+
+    MoodLogID (String): Unique identifier for the mood log.
+    UserID (String): Identifier of the user.
+    Mood (String): Mood level of the user.
+    EnergyLevel (String): Energy level of the user.
+    LoggedAt (String): Timestamp of when the mood and energy level were logged.

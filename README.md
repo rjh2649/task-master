@@ -183,3 +183,440 @@ Attributes:
     Mood (String): Mood level of the user.
     EnergyLevel (String): Energy level of the user.
     LoggedAt (String): Timestamp of when the mood and energy level were logged.
+
+# API endpoints
+
+1. Register User
+
+Name: Register User
+Description: Registers a new user.
+HTTP Method: POST
+Path: /users/register
+Request Body:
+
+json
+
+{
+  "email": "string",
+  "password": "string"
+}
+
+Response Body:
+
+json
+
+{
+  "userID": "string",
+  "email": "string",
+  "registeredAt": "string"
+}
+
+Errors:
+
+    400 Bad Request: Invalid input (e.g., missing fields, invalid email format).
+    409 Conflict: Email already exists.
+
+2. Login User
+
+Name: Login User
+Description: Authenticates a user and provides a session token.
+HTTP Method: POST
+Path: /users/login
+Request Body:
+
+json
+
+{
+  "email": "string",
+  "password": "string"
+}
+
+Response Body:
+
+json
+
+{
+  "token": "string"
+}
+
+Errors:
+
+    400 Bad Request: Invalid input.
+    401 Unauthorized: Incorrect email or password.
+
+3. Create Task
+
+Name: Create Task
+Description: Creates a new task for the user.
+HTTP Method: POST
+Path: /tasks
+Request Body:
+
+json
+
+{
+  "userID": "string",
+  "title": "string",
+  "description": "string",
+  "priority": "string",
+  "dueDate": "string",
+  "points": "number"
+}
+
+Response Body:
+
+json
+
+{
+  "taskID": "string",
+  "userID": "string",
+  "title": "string",
+  "description": "string",
+  "priority": "string",
+  "dueDate": "string",
+  "completionStatus": "string",
+  "createdAt": "string",
+  "points": "number"
+}
+
+Errors:
+
+    400 Bad Request: Invalid input.
+
+4. Update Task
+
+Name: Update Task
+Description: Updates an existing task.
+HTTP Method: PUT
+Path: /tasks/{taskID}
+Path Parameters:
+
+    taskID: ID of the task to update.
+
+Request Body:
+
+json
+
+{
+  "title": "string",
+  "description": "string",
+  "priority": "string",
+  "dueDate": "string",
+  "completionStatus": "string"
+}
+
+Response Body:
+
+json
+
+{
+  "taskID": "string",
+  "userID": "string",
+  "title": "string",
+  "description": "string",
+  "priority": "string",
+  "dueDate": "string",
+  "completionStatus": "string",
+  "createdAt": "string",
+  "completedAt": "string",
+  "points": "number"
+}
+
+Errors:
+
+    400 Bad Request: Invalid input.
+    404 Not Found: Task not found.
+
+5. Delete Task
+
+Name: Delete Task
+Description: Deletes an existing task.
+HTTP Method: DELETE
+Path: /tasks/{taskID}
+Path Parameters:
+
+    taskID: ID of the task to delete.
+
+Response Body:
+
+json
+
+{
+  "status": "string"
+}
+
+Errors:
+
+    404 Not Found: Task not found.
+
+6. Complete Task
+
+Name: Complete Task
+Description: Marks a task as completed.
+HTTP Method: POST
+Path: /tasks/{taskID}/complete
+Path Parameters:
+
+    taskID: ID of the task to complete.
+
+Response Body:
+
+json
+
+{
+  "taskID": "string",
+  "userID": "string",
+  "title": "string",
+  "description": "string",
+  "priority": "string",
+  "dueDate": "string",
+  "completionStatus": "string",
+  "createdAt": "string",
+  "completedAt": "string",
+  "points": "number"
+}
+
+Errors:
+
+    404 Not Found: Task not found.
+    400 Bad Request: Task already completed.
+
+7. Create Tag
+
+Name: Create Tag
+Description: Creates a new tag for the user.
+HTTP Method: POST
+Path: /tags
+Request Body:
+
+json
+
+{
+  "userID": "string",
+  "name": "string"
+}
+
+Response Body:
+
+json
+
+{
+  "tagID": "string",
+  "userID": "string",
+  "name": "string"
+}
+
+Errors:
+
+    400 Bad Request: Invalid input.
+
+8. Assign Tag to Task
+
+Name: Assign Tag to Task
+Description: Assigns a tag to a task.
+HTTP Method: POST
+Path: /tasks/{taskID}/tags
+Path Parameters:
+
+    taskID: ID of the task to assign the tag to.
+
+Request Body:
+
+json
+
+{
+  "tagID": "string"
+}
+
+Response Body:
+
+json
+
+{
+  "taskTagID": "string",
+  "taskID": "string",
+  "tagID": "string"
+}
+
+Errors:
+
+    404 Not Found: Task or tag not found.
+    400 Bad Request: Tag already assigned to the task.
+
+9. Remove Tag from Task
+
+Name: Remove Tag from Task
+Description: Removes a tag from a task.
+HTTP Method: DELETE
+Path: /tasks/{taskID}/tags/{taskTagID}
+Path Parameters:
+
+    taskID: ID of the task.
+    taskTagID: ID of the task-tag association to remove.
+
+Response Body:
+
+json
+
+{
+  "status": "string"
+}
+
+Errors:
+
+    404 Not Found: Task or tag not found.
+
+10. Create Reward
+
+Name: Create Reward
+Description: Creates a new reward.
+HTTP Method: POST
+Path: /rewards
+Request Body:
+
+json
+
+{
+  "name": "string",
+  "description": "string",
+  "pointsRequired": "number"
+}
+
+Response Body:
+
+json
+
+{
+  "rewardID": "string",
+  "name": "string",
+  "description": "string",
+  "pointsRequired": "number"
+}
+
+Errors:
+
+    400 Bad Request: Invalid input.
+
+11. Redeem Reward
+
+Name: Redeem Reward
+Description: Redeems a reward for the user.
+HTTP Method: POST
+Path: /rewards/redeem
+Request Body:
+
+json
+
+{
+  "userID": "string",
+  "rewardID": "string"
+}
+
+Response Body:
+
+json
+
+{
+  "userRewardID": "string",
+  "userID": "string",
+  "rewardID": "string",
+  "redeemedAt": "string"
+}
+
+Errors:
+
+    404 Not Found: Reward not found.
+    400 Bad Request: Insufficient points.
+
+12. Start Focus Session
+
+Name: Start Focus Session
+Description: Starts a focus session for a task.
+HTTP Method: POST
+Path: /focus-sessions/start
+Request Body:
+
+json
+
+{
+  "userID": "string",
+  "taskID": "string",
+  "startTime": "string"
+}
+
+Response Body:
+
+json
+
+{
+  "sessionID": "string",
+  "userID": "string",
+  "taskID": "string",
+  "startTime": "string",
+  "duration": "number"
+}
+
+Errors:
+
+    400 Bad Request: Invalid input.
+
+13. End Focus Session
+
+Name: End Focus Session
+Description: Ends a focus session for a task.
+HTTP Method: POST
+Path: /focus-sessions/end
+Request Body:
+
+json
+
+{
+  "sessionID": "string",
+  "endTime": "string"
+}
+
+Response Body:
+
+json
+
+{
+  "sessionID": "string",
+  "userID": "string",
+  "taskID": "string",
+  "startTime": "string",
+  "endTime": "string",
+  "duration": "number"
+}
+
+Errors:
+
+    404 Not Found: Session not found.
+
+14. Log Mood
+
+Name: Log Mood
+Description: Logs the user's mood and energy level.
+HTTP Method: POST
+Path: /mood-logs
+Request Body:
+
+json
+
+{
+  "userID": "string",
+  "mood": "string",
+  "energyLevel": "string",
+  "loggedAt": "string"
+}
+
+Response Body:
+
+json
+
+{
+  "moodLogID": "string",
+  "userID": "string",
+  "mood": "string",
+  "energyLevel": "string",
+  "loggedAt": "string"
+}

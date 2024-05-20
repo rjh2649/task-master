@@ -42,26 +42,12 @@ As someone with ADHD, I find myself struggling to get things done in timely fash
 # Rough Class Diagram
 [![jLbBRzms4BxpLwW-zO44xTK8Z6nifosmpM7j77gK9OOMhCUMfBn8ZVxtajI37CwGAmUjBmiDFtBc6tAeR-JtIfTIZrtBs7Sr_zBql3ZSNj_lFlswlsNggUcFfIoxecfBfOeNLfY_3sNr9EGmzlNrq0xotRjzsJtKvSUnhtGpz5TNnRuHZ_fFthR3QPeno9hB5Ff3QnPqk9sKmyd1PkC_](https://github.com/rjh2649/task-master/assets/146969105/9a68ba9d-bbad-4a86-950b-b1bf010c81d3)
 ](https://www.planttext.com/api/plantuml/png/jLbDRzms4BtpLoW-jGaI95SZCBAndI30DWVREUGeImmjM1At96KZDVhVmmz9_9WXLmvQNnOxVEJmpN38Dsj2FaXL2pKDFI4lMlgZ6sbrTNb-i_lwUNz9v7qt7cfH3rNJrr9MJwJIVn_hvfu9FetjEU-vUFz-Nm-tRVrf6XlLyV7ihDftx4vzfttF7zqCBbegSkYFlLxGudP2y4SBcut_4k8ytzJothf_TQr4Dx9AQSENYy0mIIeYW-fKJuFlBPMDw0x6QM0zY8wBJlqCWHEzg5KujU73eQTcvhMgrIJ38K4rjjqf25-iNwVXbehgmBjHoP0IInYnCg6n7cWS4RY4jSLXI0Fb_AphND77MhJHCiAQeEziB2E6L_JlgHEqzIw-QIQ8csarbtaZsz7BKphO0AzUFl5cajTKIhsfo8zqjYEd9GsJhOkRBg9DntQnp9JRITGs2kis_kAytVCuBuEpbNTWG94lAjZFFNsWVM3jEMCnxNDx0CrfsEc2Uj17sRg6TMPMyU0hAgTULNVrsFRKf8nAzKSuR2qwqFRpJypVWabp-fzNOQQ001cx4NjJc6m6v-_GRW-H1wCX2eTp8OAOuitrVrvKw9wAmRgWvkhQ62mFHeCL3kU21J58i52qf-5BDk9yFj_3MuiZWEFb4G6o1OAWIfGGjxdSB2UUFQFKMR7IsV52PvlgF7wSKkSp8VluUDHEtyjit4PdnQ9qWj4S7G0frsJyIARUrmGvJlOpV587_h0nJIiMvHMCvdW122u8CFpn0h9fT6_qvYFdu8LJjm3A1oz6FQL7xNUr2BB79vS7gq-SrWYZPOJ6vWY4y4n2Gq0-fn1LhBvL8cMMy3m3BURrbvzsRLHFgAGsa0PpKEO8AaS_2oqhZRo2AwtiGnC9o1_15p__ScoV6Pna1XeQWCa59WCy9dONsPfVvrb1q4hMYDmDv6SaIdeTov5D0CNS_wPsZlTdFIpoVPRigO3QIDo32oAoJ1zYZdKKXI2WgsuWxUJMHj8UN123PT8GWvD69nIUCtFhLIVlJghNhy-gaxTlthmySJyfdEfDoimmqwEklPV4Wf4574hlX3UT-HsWUkpK7J7MBBZHEAQb_3yKTnpSqATpeol9R2X1ctgiRkdQ6gDhHzMTvxwSXrDJCv8GsFCPCEmy2TACnaYN9G9QDuCoNtMgGFDanc0BHv2kBaREla3dutt1tiECmGw884rHZ9nz4KpysmWWhGX1-vCKlKGCTWcU1v3gOT0Po0v3ayEItB383IC4A6Wp0ZGy0POODtj95VL2nde2cjQC0bLDeCwES6jE43tfYSVQZg2IDqL7aOeqbjk0rLG4Kt5k76fAWWhD53txHRITFVbUpv6iX3B0hCY3qwAjPDGJvcpTL6Wc92DW330ZhT8fqOPG7GETP3QJ20m3IAGDIQLEW9cTnHB2ZC-NvtAJfIwWZY28j8YHqKsMSmVVJdz5HUwGHpr6BeNpGGj7yv-1Nm00)
+
+# Example Sequence Diagram
+![ZP4x3i8m38RtdC8Z7P0wC6L0fNHXhU009h5486qXSIhrzZIY8A3buS6I7zzlEyaye-DGMO6A6mSxJqw8w66-XBKZPDgYFwqKczPm9vzo9Lq2UHRZha_i0MjjQU1c8wL4e6KmTOlMQ723FFGsFIAkAM6Hff2ZXliwP3t1ln95LsFL5Bc4S-0DKpMB7SaN8iOIrACsTKQaO-Br7KhomRAy](https://github.com/rjh2649/task-master/assets/146969105/9d7763f6-2e46-4b74-96ea-809b1ed48fea)
+
 # DynamoDB Tables
-
-1. Users Table
-Table Name: Users
-
-Purpose: To store user information and authentication details.
-
-Primary Key:
-
-    UserID (String) - Partition key
-
-Attributes:
-
-    UserID (String): Unique identifier for the user.
-    Email (String): User's email address.
-    PasswordHash (String): Hashed password for authentication.
-    Points (Number): Total points earned by the user.
-    RegisteredAt (String): Timestamp of when the user registered.
-
-2. Tasks Table
+1. Tasks Table
 Table Name: Tasks
 
 Purpose: To store information about user tasks.
@@ -87,7 +73,7 @@ Attributes:
     CompletedAt (String): Timestamp of when the task was completed.
     Points (Number): Points awarded upon completion of the task.
 
-3. Rewards Table
+2. Rewards Table
 Table Name: Rewards
 
 Purpose: To store information about available rewards and activities.
@@ -103,7 +89,7 @@ Attributes:
     Description (String): Description of the reward.
     PointsRequired (Number): Points required to redeem the reward.
 
-4. UserRewards Table
+3. UserRewards Table
 Table Name: UserRewards
 
 Purpose: To track rewards redeemed by users.
@@ -118,23 +104,8 @@ Attributes:
     UserID (String): Identifier of the user.
     RewardID (String): Identifier of the reward.
     RedeemedAt (String): Timestamp of when the reward was redeemed.
-
-5. Tags Table
-Table Name: Tags
-
-Purpose: To store tags for categorizing tasks.
-
-Primary Key:
-
-    TagID (String) - Partition key
-
-Attributes:
-
-    TagID (String): Unique identifier for the tag.
-    UserID (String): Identifier of the user who created the tag.
-    Name (String): Name of the tag.
-
-6. TaskTags Table
+    
+4. TaskTags Table
 Table Name: TaskTags
 
 Purpose: To associate tags with tasks.
@@ -149,7 +120,7 @@ Attributes:
     TaskID (String): Identifier of the task.
     TagID (String): Identifier of the tag.
 
-7. FocusSessions Table
+5. FocusSessions Table
 Table Name: FocusSessions
 
 Purpose: To store information about user's focus sessions.
@@ -167,7 +138,7 @@ Attributes:
     EndTime (String): Timestamp of when the session ended.
     Duration (Number): Duration of the session in minutes.
 
-8. MoodLogs Table
+6. MoodLogs Table
 Table Name: MoodLogs
 
 Purpose: To store user's mood and energy level logs.

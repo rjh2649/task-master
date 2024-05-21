@@ -8,7 +8,7 @@ As someone with ADHD, I find myself struggling to get things done in timely fash
 
 1. As a user, I'd like to create tasks and assign priority levels (eg. high, medium, low; 1-5).
   a. Create a new task
-  b. Assign priority
+  b. Assign priority (1 - Urgent and Important, 2 - Not Urgent, Important; 3 - Urgent, Not Important; 4 - Not Urgent, Not Important)
   c. Set time for task
   d. Add task details/notes
 2. As a user, I'd like the app to generate a daily schedule based on my prioritized tasks.
@@ -44,10 +44,12 @@ As someone with ADHD, I find myself struggling to get things done in timely fash
 ](https://www.planttext.com/api/plantuml/png/jLbDRzms4BtpLoW-jGaI95SZCBAndI30DWVREUGeImmjM1At96KZDVhVmmz9_9WXLmvQNnOxVEJmpN38Dsj2FaXL2pKDFI4lMlgZ6sbrTNb-i_lwUNz9v7qt7cfH3rNJrr9MJwJIVn_hvfu9FetjEU-vUFz-Nm-tRVrf6XlLyV7ihDftx4vzfttF7zqCBbegSkYFlLxGudP2y4SBcut_4k8ytzJothf_TQr4Dx9AQSENYy0mIIeYW-fKJuFlBPMDw0x6QM0zY8wBJlqCWHEzg5KujU73eQTcvhMgrIJ38K4rjjqf25-iNwVXbehgmBjHoP0IInYnCg6n7cWS4RY4jSLXI0Fb_AphND77MhJHCiAQeEziB2E6L_JlgHEqzIw-QIQ8csarbtaZsz7BKphO0AzUFl5cajTKIhsfo8zqjYEd9GsJhOkRBg9DntQnp9JRITGs2kis_kAytVCuBuEpbNTWG94lAjZFFNsWVM3jEMCnxNDx0CrfsEc2Uj17sRg6TMPMyU0hAgTULNVrsFRKf8nAzKSuR2qwqFRpJypVWabp-fzNOQQ001cx4NjJc6m6v-_GRW-H1wCX2eTp8OAOuitrVrvKw9wAmRgWvkhQ62mFHeCL3kU21J58i52qf-5BDk9yFj_3MuiZWEFb4G6o1OAWIfGGjxdSB2UUFQFKMR7IsV52PvlgF7wSKkSp8VluUDHEtyjit4PdnQ9qWj4S7G0frsJyIARUrmGvJlOpV587_h0nJIiMvHMCvdW122u8CFpn0h9fT6_qvYFdu8LJjm3A1oz6FQL7xNUr2BB79vS7gq-SrWYZPOJ6vWY4y4n2Gq0-fn1LhBvL8cMMy3m3BURrbvzsRLHFgAGsa0PpKEO8AaS_2oqhZRo2AwtiGnC9o1_15p__ScoV6Pna1XeQWCa59WCy9dONsPfVvrb1q4hMYDmDv6SaIdeTov5D0CNS_wPsZlTdFIpoVPRigO3QIDo32oAoJ1zYZdKKXI2WgsuWxUJMHj8UN123PT8GWvD69nIUCtFhLIVlJghNhy-gaxTlthmySJyfdEfDoimmqwEklPV4Wf4574hlX3UT-HsWUkpK7J7MBBZHEAQb_3yKTnpSqATpeol9R2X1ctgiRkdQ6gDhHzMTvxwSXrDJCv8GsFCPCEmy2TACnaYN9G9QDuCoNtMgGFDanc0BHv2kBaREla3dutt1tiECmGw884rHZ9nz4KpysmWWhGX1-vCKlKGCTWcU1v3gOT0Po0v3ayEItB383IC4A6Wp0ZGy0POODtj95VL2nde2cjQC0bLDeCwES6jE43tfYSVQZg2IDqL7aOeqbjk0rLG4Kt5k76fAWWhD53txHRITFVbUpv6iX3B0hCY3qwAjPDGJvcpTL6Wc92DW330ZhT8fqOPG7GETP3QJ20m3IAGDIQLEW9cTnHB2ZC-NvtAJfIwWZY28j8YHqKsMSmVVJdz5HUwGHpr6BeNpGGj7yv-1Nm00)
 
 # Example Sequence Diagram
-![ZP4x3i8m38RtdC8Z7P0wC6L0fNHXhU009h5486qXSIhrzZIY8A3buS6I7zzlEyaye-DGMO6A6mSxJqw8w66-XBKZPDgYFwqKczPm9vzo9Lq2UHRZha_i0MjjQU1c8wL4e6KmTOlMQ723FFGsFIAkAM6Hff2ZXliwP3t1ln95LsFL5Bc4S-0DKpMB7SaN8iOIrACsTKQaO-Br7KhomRAy](https://github.com/rjh2649/task-master/assets/146969105/9d7763f6-2e46-4b74-96ea-809b1ed48fea)
+![XPFFJiCm3CRlUGeVkmFZtWFQM0zK0Z6nyG0XyMWWJKlYJEhRatHhwVf7N2B5_dssyrdPEEAMVAaP5rHPU7Te6Oidt3q0SVVzmXsXNHTKwXIUAov1MEI4RH9g_ebiX4NbXJc6nFhBfP0ReRr41qvOLHExIKU-G2w3FB8wz7XghycAzV48IKxy4AR4dij29533nEtSEwtGKCkVa4IHot1L](https://github.com/rjh2649/task-master/assets/146969105/8198a201-b5a1-4199-b9ae-fa79c8ba9ee8)
+
 
 # DynamoDB Tables
-1. Tasks Table
+Tasks Table
+
 Table Name: Tasks
 
 Purpose: To store information about user tasks.
@@ -73,7 +75,8 @@ Attributes:
     CompletedAt (String): Timestamp of when the task was completed.
     Points (Number): Points awarded upon completion of the task.
 
-2. Rewards Table
+Rewards Table
+
 Table Name: Rewards
 
 Purpose: To store information about available rewards and activities.
@@ -89,7 +92,8 @@ Attributes:
     Description (String): Description of the reward.
     PointsRequired (Number): Points required to redeem the reward.
 
-3. UserRewards Table
+UserRewards Table
+
 Table Name: UserRewards
 
 Purpose: To track rewards redeemed by users.
@@ -105,7 +109,8 @@ Attributes:
     RewardID (String): Identifier of the reward.
     RedeemedAt (String): Timestamp of when the reward was redeemed.
     
-4. TaskTags Table
+TaskTags Table
+
 Table Name: TaskTags
 
 Purpose: To associate tags with tasks.
@@ -120,7 +125,7 @@ Attributes:
     TaskID (String): Identifier of the task.
     TagID (String): Identifier of the tag.
 
-5. FocusSessions Table
+FocusSessions Table
 Table Name: FocusSessions
 
 Purpose: To store information about user's focus sessions.
@@ -138,7 +143,7 @@ Attributes:
     EndTime (String): Timestamp of when the session ended.
     Duration (Number): Duration of the session in minutes.
 
-6. MoodLogs Table
+MoodLogs Table
 Table Name: MoodLogs
 
 Purpose: To store user's mood and energy level logs.
@@ -491,3 +496,7 @@ Response Body:
     "energyLevel": "string",
     "loggedAt": "string"
   
+
+# Example WireFrame
+
+![quickAndDirtyMockup](https://github.com/rjh2649/task-master/assets/146969105/8c941eb7-4984-47dd-8621-53ad728f166e)

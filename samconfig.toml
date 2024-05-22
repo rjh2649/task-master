@@ -1,0 +1,13 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "task-master"
+region = "us-east-2"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+image_repositories = []
+resolve_s3 = true
+s3_prefix = "music-playlist-service"
+disable_rollback = true
+parameter_overrides = "CognitoDomain=\"project-u5-test-ryan-horn\" S3Bucket=\"nss-s3-c04-u5-project-ryan-horn\" FrontendDeployment=\"local\""

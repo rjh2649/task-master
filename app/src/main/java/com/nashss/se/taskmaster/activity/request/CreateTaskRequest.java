@@ -5,30 +5,30 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.nashss.se.taskmaster.enums.Priority;
 import com.nashss.se.taskmaster.enums.Status;
 
-@JsonDeserialize()
+@JsonDeserialize(builder = CreateTaskRequest.Builder.class)
 public class CreateTaskRequest {
-    private final String id;
-    private final String description;
+    private final String email;
+    private final String task;
     private final Priority priority;
     private final String doBy;
     private final Status status;
     private final Integer points;
 
-    private CreateTaskRequest(String id, String description, Priority priority, String doBy, Status status, Integer points) {
-        this.id = id;
-        this.description = description;
+    private CreateTaskRequest(String email, String task, Priority priority, String doBy, Status status, Integer points) {
+        this.email = email;
+        this.task = task;
         this.priority = priority;
         this.doBy = doBy;
         this.status = status;
         this.points = points;
     }
 
-    public String getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTask() {
+        return task;
     }
 
     public Priority getPriority() {
@@ -50,8 +50,8 @@ public class CreateTaskRequest {
     @Override
     public String toString() {
         return "CreateTaskRequest{" +
-        "task='" + id + '\'' +
-        "description='" + description + '\'' +
+        "email='" + email + '\'' +
+        "task='" + task + '\'' +
         "priority='" + priority.getLevel() + '\'' +
         "doBy='" + doBy + '\'' +
         "status='" + status.getStatus() + '\'' +
@@ -65,20 +65,20 @@ public class CreateTaskRequest {
 
     @JsonPOJOBuilder
     public static class Builder {
-        private String id;
-        private String description;
+        private String email;
+        private String task;
         private Priority priority;
         private String doBy;
         private Status status;
         private Integer points;
 
-        public Builder withId(String id) {
-            this.id = id;
+        public Builder withEmail(String email) {
+            this.email = email;
             return this;
         }
 
-        public Builder withDescription(String description) {
-            this.description = description;
+        public Builder withTask(String task) {
+            this.task = task;
             return this;
         }
 
@@ -103,7 +103,10 @@ public class CreateTaskRequest {
         }
 
         public CreateTaskRequest build() {
-            return new CreateTaskRequest(id, description, priority, doBy, status, points);
+            System.out.println("Building request...");
+            CreateTaskRequest request = new CreateTaskRequest(email, task, priority, doBy, status, points);
+            System.out.println(request);
+            return request;
         }
     }
 }

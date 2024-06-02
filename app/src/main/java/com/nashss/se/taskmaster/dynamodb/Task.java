@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
 import com.nashss.se.taskmaster.enums.Priority;
@@ -11,29 +12,29 @@ import com.nashss.se.taskmaster.enums.Status;
 
 @DynamoDBTable(tableName = "Tasks")
 public class Task {
-    private String id;
-    private String description;
+    private String email;
+    private String task;
     private Priority priority;
     private String doBy;
     private Status status;
     private Integer points;
 
-    @DynamoDBHashKey(attributeName = "task_id")
-    public String getId() {
-        return id;
+    @DynamoDBHashKey(attributeName = "email")
+    public String getEmail() {
+        return email;
     }
 
-    public void setId(String taskId) {
-        this.id = taskId;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    @DynamoDBAttribute(attributeName = "description")
-    public String getDescription() {
-        return description;
+    @DynamoDBRangeKey(attributeName = "task")
+    public String getTask() {
+        return task;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.task = description;
     }
     @DynamoDBTypeConvertedEnum
     @DynamoDBAttribute(attributeName = "priority")
@@ -80,17 +81,17 @@ public class Task {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        Task task = (Task) object;
-        return id.equals(task.id) &&
-                description.equals(task.description) &&
-                priority.equals(task.priority) &&
-                doBy.equals(task.doBy) &&
-                status.equals(task.status) &&
-                points.equals(task.points);
+        Task that = (Task) object;
+        return email.equals(that.email) &&
+                task.equals(that.task) &&
+                priority.equals(that.priority) &&
+                doBy.equals(that.doBy) &&
+                status.equals(that.status) &&
+                points.equals(that.points);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, priority, doBy, status, points);
+        return Objects.hash(email, task, priority, doBy, status, points);
     }
 }

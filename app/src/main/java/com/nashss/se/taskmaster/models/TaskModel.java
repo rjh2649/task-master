@@ -6,28 +6,28 @@ import com.nashss.se.taskmaster.enums.Priority;
 import com.nashss.se.taskmaster.enums.Status;
 
 public class TaskModel {
-    private final String id;
-    private final String description;
+    private final String email;
+    private final String task;
     private final Priority priority;
     private final String doBy;
     private final Status status;
     private final Integer points;
 
-    private TaskModel(String id, String description, Priority priority, String doBy, Status status, Integer points) {
-        this.id = id;
-        this.description = description;
+    private TaskModel(String email, String task, Priority priority, String doBy, Status status, Integer points) {
+        this.email = email;
+        this.task = task;
         this.priority = priority;
         this.doBy = doBy;
         this.status = status;
         this.points = points;
     }
 
-    public String getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
     
-    public String getDescription() {
-        return description;
+    public String getTask() {
+        return task;
     }
 
     public Priority getPriority() {
@@ -54,18 +54,18 @@ public class TaskModel {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        TaskModel taskModel = (TaskModel) object;
-        return id.equals(taskModel.id) &&
-                description.equals(taskModel.description) &&
-                priority.equals(taskModel.priority) &&
-                doBy.equals(taskModel.doBy) &&
-                status.equals(taskModel.status) &&
-                points.equals(taskModel.points);
+        TaskModel that = (TaskModel) object;
+        return email.equals(that.email) &&
+                task.equals(that.task) &&
+                priority.equals(that.priority) &&
+                doBy.equals(that.doBy) &&
+                status.equals(that.status) &&
+                points.equals(that.points);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, priority, doBy, status, points);
+        return Objects.hash(email, task, priority, doBy, status, points);
     }
 
     public static Builder builder() {
@@ -73,20 +73,20 @@ public class TaskModel {
     }
 
     public static class Builder {
-        private String id;
-        private String description;
+        private String email;
+        private String task;
         private Priority priority;
         private String doBy;
         private Status status;
         private Integer points;
 
-        public Builder withId(String id) {
-            this.id = id;
+        public Builder withEmail(String email) {
+            this.email = email;
             return this;
         }
 
-        public Builder withDescription(String description) {
-            this.description = description;
+        public Builder withTask(String task) {
+            this.task = task;
             return this;
         }
 
@@ -111,7 +111,7 @@ public class TaskModel {
         }
 
         public TaskModel build() {
-            return new TaskModel(id, description, priority, doBy, status, points);
+            return new TaskModel(email, task, priority, doBy, status, points);
         }
     }
 }

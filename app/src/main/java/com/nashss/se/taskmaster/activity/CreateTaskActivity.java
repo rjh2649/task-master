@@ -25,8 +25,8 @@ public class CreateTaskActivity {
         log.info("Received CreateTaskRequest {}", request);
 
         Task task = new Task();
-        task.setId(request.getId());
-        task.setDescription(request.getDescription());
+        task.setEmail(request.getEmail());
+        task.setDescription(request.getTask());
         task.setPriority(request.getPriority());
         task.setDoBy(request.getDoBy());
         task.setStatus(request.getStatus());

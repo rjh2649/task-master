@@ -5,6 +5,7 @@ import java.util.Objects;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
 import com.nashss.se.taskmaster.enums.Priority;
 import com.nashss.se.taskmaster.enums.Status;
 
@@ -22,14 +23,26 @@ public class Task {
         return id;
     }
 
+    public void setId(String taskId) {
+        this.id = taskId;
+    }
+
     @DynamoDBAttribute(attributeName = "description")
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    @DynamoDBTypeConvertedEnum
     @DynamoDBAttribute(attributeName = "priority")
-    public String getPriority() {
-        return priority.getLevel();
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     @DynamoDBAttribute(attributeName = "do_by")
@@ -37,14 +50,26 @@ public class Task {
         return doBy;
     }
 
+    public void setDoBy(String doBy) {
+        this.doBy = doBy;
+    }
+
     @DynamoDBAttribute(attributeName = "status")
-    public String getStatus() {
-        return status.getStatus();
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @DynamoDBAttribute(attributeName = "points")
     public Integer getPoints() {
         return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
     }
     
     @Override

@@ -69,7 +69,7 @@ public class TaskModel {
     }
 
     public static Builder builder() {
-        return null;
+        return new Builder();
     }
 
     public static class Builder {
@@ -90,7 +90,7 @@ public class TaskModel {
             return this;
         }
 
-        public Builder wtihPriority(Priority priority) {
+        public Builder withPriority(Priority priority) {
             this.priority = priority;
             return this;
         }

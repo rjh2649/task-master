@@ -38,7 +38,10 @@ public class CreateTaskResult {
         }
 
         public CreateTaskResult build() {
-            return new CreateTaskResult(taskModel);
+            System.out.println("Building result...");
+            CreateTaskResult result = new CreateTaskResult(taskModel);
+            System.out.println(result.getTaskModel().getId());
+            return result;
         }
     }
 }

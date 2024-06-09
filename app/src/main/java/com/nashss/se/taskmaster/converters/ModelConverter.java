@@ -6,8 +6,8 @@ import com.nashss.se.taskmaster.models.TaskModel;
 public class ModelConverter {
     public TaskModel toTaskModel(Task task) {
         return TaskModel.builder()
-                .withEmail(task.getEmail())
-                .withTask(task.getTask())
+                .withEmail(task.getId())
+                .withTask(task.getDesc())
                 .withPriority(task.getPriority())
                 .withDoBy(task.getDoBy())
                 .withStatus(task.getStatus())

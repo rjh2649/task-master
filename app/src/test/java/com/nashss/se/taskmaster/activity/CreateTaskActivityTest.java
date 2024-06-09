@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
+import java.util.UUID;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -33,8 +35,8 @@ public class CreateTaskActivityTest {
     void handleRequest_withValidFields_createsTask() {
         //GIVEN
         CreateTaskRequest request = CreateTaskRequest.builder()
-                                    .withEmail("email@email.com")
-                                    .withTask("Sample Task")
+                                    .withId(UUID.randomUUID().toString())
+                                    .withDesc("Sample Task")
                                     .withPriority(Priority.URGENT_AND_IMPORTANT)
                                     .withDoBy("2024-06-30")
                                     .withStatus(Status.NOT_STARTED)
@@ -47,6 +49,16 @@ public class CreateTaskActivityTest {
         //THEN
         verify(dao).saveTask(any(Task.class));
         assertNotNull(result.getTaskModel());
-        assertEquals("email@email.com", result.getTaskModel().getEmail());
+        assertEquals(request.getId(), result.getTaskModel().getId());
+        assertEquals(request.getDesc(), result.getTaskModel().getDesc());
+        assertEquals(request.getPriority(), result.getTaskModel().getPriority());
+        assertEquals(request.getDoBy(), result.getTaskModel().getDoBy());
+        assertEquals(request.getStatus(), result.getTaskModel().getStatus());
+        assertEquals(request.getPoints(), result.getTaskModel().getPoints());
+    }
+
+    @Test
+    void handleRequest_withInvalidFields_throwsException() {
+
     }
 }

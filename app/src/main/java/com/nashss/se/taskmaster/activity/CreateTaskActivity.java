@@ -21,20 +21,25 @@ public class CreateTaskActivity {
         this.dao = dao;
     }
 
+    /**
+     * Gets the relevant info from the request and saves it as a new item in the Tasks table.
+     * @param request the request to create a Task item
+     * @return CreateTaskResult
+     */
     public CreateTaskResult handleRequest(final CreateTaskRequest request) {
         log.info("Received CreateTaskRequest {}", request);
 
-        Task task = new Task();
-        task.setEmail(request.getEmail());
-        task.setDescription(request.getTask());
-        task.setPriority(request.getPriority());
-        task.setDoBy(request.getDoBy());
-        task.setStatus(request.getStatus());
-        task.setPoints(request.getPoints());
+        Task newTask = new Task();
+        newTask.setEmail(request.getId());
+        newTask.setTask(request.getDesc());
+        newTask.setPriority(request.getPriority());
+        newTask.setDoBy(request.getDoBy());
+        newTask.setStatus(request.getStatus());
+        newTask.setPoints(request.getPoints());
         
-        dao.saveTask(task);
+        dao.saveTask(newTask);
 
-        TaskModel model = new ModelConverter().toTaskModel(task);
+        TaskModel model = new ModelConverter().toTaskModel(newTask);
         
         return CreateTaskResult.builder()
                 .withTaskModel(model)

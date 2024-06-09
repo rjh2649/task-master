@@ -6,28 +6,28 @@ import com.nashss.se.taskmaster.enums.Priority;
 import com.nashss.se.taskmaster.enums.Status;
 
 public class TaskModel {
-    private final String email;
-    private final String task;
+    private final String id;
+    private final String desc;
     private final Priority priority;
     private final String doBy;
     private final Status status;
     private final Integer points;
 
-    private TaskModel(String email, String task, Priority priority, String doBy, Status status, Integer points) {
-        this.email = email;
-        this.task = task;
+    private TaskModel(String id, String desc, Priority priority, String doBy, Status status, Integer points) {
+        this.id = id;
+        this.desc = desc;
         this.priority = priority;
         this.doBy = doBy;
         this.status = status;
         this.points = points;
     }
 
-    public String getEmail() {
-        return email;
+    public String getId() {
+        return id;
     }
     
-    public String getTask() {
-        return task;
+    public String getDesc() {
+        return desc;
     }
 
     public Priority getPriority() {
@@ -55,8 +55,8 @@ public class TaskModel {
             return false;
         }
         TaskModel that = (TaskModel) object;
-        return email.equals(that.email) &&
-                task.equals(that.task) &&
+        return id.equals(that.id) &&
+                desc.equals(that.desc) &&
                 priority.equals(that.priority) &&
                 doBy.equals(that.doBy) &&
                 status.equals(that.status) &&
@@ -65,7 +65,7 @@ public class TaskModel {
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, task, priority, doBy, status, points);
+        return Objects.hash(id, desc, priority, doBy, status, points);
     }
 
     public static Builder builder() {

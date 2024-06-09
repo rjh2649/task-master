@@ -10,31 +10,31 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
 import com.nashss.se.taskmaster.enums.Priority;
 import com.nashss.se.taskmaster.enums.Status;
 
-@DynamoDBTable(tableName = "Tasks")
+@DynamoDBTable(tableName = "tasks")
 public class Task {
-    private String email;
-    private String task;
+    private String id;
+    private String desc;
     private Priority priority;
     private String doBy;
     private Status status;
     private Integer points;
 
-    @DynamoDBHashKey(attributeName = "email")
-    public String getEmail() {
-        return email;
+    @DynamoDBHashKey(attributeName = "task_id")
+    public String getId() {
+        return id;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String id) {
+        this.id = id;
     }
 
-    @DynamoDBRangeKey(attributeName = "task")
-    public String getTask() {
-        return task;
+    @DynamoDBAttribute(attributeName = "description")
+    public String getDesc() {
+        return desc;
     }
 
-    public void setDescription(String description) {
-        this.task = description;
+    public void setTask(String desc) {
+        this.desc = desc;
     }
     @DynamoDBTypeConvertedEnum
     @DynamoDBAttribute(attributeName = "priority")
@@ -55,6 +55,7 @@ public class Task {
         this.doBy = doBy;
     }
 
+    @DynamoDBTypeConvertedEnum
     @DynamoDBAttribute(attributeName = "status")
     public Status getStatus() {
         return status;
@@ -82,8 +83,8 @@ public class Task {
             return false;
         }
         Task that = (Task) object;
-        return email.equals(that.email) &&
-                task.equals(that.task) &&
+        return id.equals(that.id) &&
+                desc.equals(that.desc) &&
                 priority.equals(that.priority) &&
                 doBy.equals(that.doBy) &&
                 status.equals(that.status) &&
@@ -92,6 +93,6 @@ public class Task {
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, task, priority, doBy, status, points);
+        return Objects.hash(id, desc, priority, doBy, status, points);
     }
 }

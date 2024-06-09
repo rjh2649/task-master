@@ -14,8 +14,8 @@ public class CreateTaskLambda
             CreateTaskRequest unauthenticatedRequest = input.fromBody(CreateTaskRequest.class);
             return input.fromUserClaims(claims -> 
                     CreateTaskRequest.builder()
-                    .withEmail(unauthenticatedRequest.getEmail())
-                    .withTask(unauthenticatedRequest.getTask())
+                    .withId(unauthenticatedRequest.getId())
+                    .withDesc(unauthenticatedRequest.getDesc())
                     .withPriority(unauthenticatedRequest.getPriority())
                     .withDoBy(unauthenticatedRequest.getDoBy())
                     .withStatus(unauthenticatedRequest.getStatus())

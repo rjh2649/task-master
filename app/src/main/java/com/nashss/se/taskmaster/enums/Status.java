@@ -11,7 +11,7 @@ public enum Status {
         this.status = status;
     }
 
-    public String getStatus() {
-        return status;
+    public Status getDefault() {
+        return NOT_STARTED;
     }
 }

@@ -38,11 +38,11 @@ export default class TMNavbar extends BindingClass {
                     <li class="nav-item">
                         <a class="nav-link active" href="#">Home</a>
                     </li>
-                    <li class="nav-item" id="login">
-                        <a class="nav-link" href="#" hidden>Log In</a>
+                    <li class="nav-item" id="Login">
+                        <a class="nav-link" href="">Log In</a>
                     </li>
-                    <li class="nav-item" id="logout">
-                        <a class="nav-link" href="#" hidden>Log Out</a>
+                    <li class="nav-item" id="Logout">
+                        <a class="nav-link" href="">Log Out</a>
                     </li>
                 </ul>
             </div>

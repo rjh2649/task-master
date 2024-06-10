@@ -1,19 +1,19 @@
 package com.nashss.se.taskmaster.enums;
 
 public enum Priority {
-    URGENT_AND_IMPORTANT("Urgent and important"),
-    NOT_URGENT_BUT_IMPORTANT("Not urgent but important"),
-    URGENT_BUT_NOT_IMPORTANT("Urgent but not important"),
-    NOT_URGENT_NOT_IMPORTANT("Not urgent and not important");
+    URGENT_AND_IMPORTANT(200),
+    NOT_URGENT_BUT_IMPORTANT(150),
+    URGENT_BUT_NOT_IMPORTANT(100),
+    NOT_URGENT_NOT_IMPORTANT(50);
 
-    private final String level;
+    private final Integer points;
 
-    Priority(String level) {
-        this.level = level;
+    Priority(Integer points) {
+        this.points = points;
     }
 
-    public String getLevel() {
-        return level;
+    public Integer getPointsForPriority() {
+        return points;
     }
 
     

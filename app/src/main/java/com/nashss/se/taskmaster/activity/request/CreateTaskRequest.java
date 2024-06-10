@@ -21,8 +21,8 @@ public class CreateTaskRequest {
         this.desc = desc;
         this.priority = priority;
         this.doBy = doBy;
-        this.status = status;
-        this.points = points;
+        this.status = status.getDefault();
+        this.points = priority.getPointsForPriority();
     }
 
     public String getId() {
@@ -54,9 +54,9 @@ public class CreateTaskRequest {
         return "CreateTaskRequest{" +
         "id='" + id + '\'' +
         "description'" + desc + '\'' +
-        "priority='" + priority.getLevel() + '\'' +
+        "priority='" + priority + '\'' +
         "doBy='" + doBy + '\'' +
-        "status='" + status.getStatus() + '\'' +
+        "status='" + status + '\'' +
         "points='" + points + '\'' +
         "}";
     }

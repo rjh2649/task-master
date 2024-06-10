@@ -4,7 +4,6 @@ import java.util.Objects;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
 import com.nashss.se.taskmaster.enums.Priority;
@@ -19,7 +18,7 @@ public class Task {
     private Status status;
     private Integer points;
 
-    @DynamoDBHashKey(attributeName = "task_id")
+    @DynamoDBHashKey(attributeName = "task_ID")
     public String getId() {
         return id;
     }

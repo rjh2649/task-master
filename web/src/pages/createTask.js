@@ -20,7 +20,7 @@ class CreateTask extends BindingClass {
     }
 
     async create(event) {
-        event.preventDeafault();
+        event.preventDefault();
 
         const errorMessage = document.getElementById('error-message');
         errorMessage.innerText = ``;

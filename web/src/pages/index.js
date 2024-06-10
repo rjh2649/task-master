@@ -2,6 +2,7 @@ import Authenticator from "../api/authenticator";
 import BindingClass from "../util/bindingClass";
 import DataStore from "../util/DataStore";
 import TMNavbar from "../components/tmNavbar";
+import TaskMasterClient from "../api/taskMaster";
 
 class Index extends BindingClass {
 
@@ -11,22 +12,13 @@ class Index extends BindingClass {
         this.bindClassMethods = (['mount'], this);
         this.dataStore = new DataStore();
         this.navbar = new TMNavbar();
+        this.client = new TaskMasterClient();
     }
 
     mount() {
         this.navbar.addNavbarToPage();
-
-        this.onStartup();
-    }
-
-    
-
-    async onStartup() {
-        if (await this.auth.isUserLoggedIn()) {
-            document.getElementById('logout').hidden = false;
-        } else {
-            document.getElementById('login').hidden = false;
-        }
+        this.navbar.createLoginButton();
+        this.navbar.createLogoutButton(this.client.getIdentity());
     }
 }
 

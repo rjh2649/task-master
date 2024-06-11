@@ -78,13 +78,16 @@ export default class TaskMasterClient extends BindingClass {
      * @param doBy when to complete the task by
      * @returns a new task
      */
-    async createTask(desc, priority, doBy, errorCallback) {
+    async createTask(id, desc, priority, doBy, status, points, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create tasks.");
             const response = await this.axiosClient.post(`tasks/create`, {
+                id: id,
                 desc: desc,
                 priority: priority,
-                doBy: doBy
+                status: status,
+                doBy: doBy,
+                points: points
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`

@@ -18,21 +18,21 @@
         <form id="create-task-form">
             <div class="mb-3" id="description">
                 <label for="task-description" class="form-label">Describe your task here:</label>
-                <textarea class="form-control" rows="3"></textarea>
+                <textarea class="form-control" rows="3" id="desc"></textarea>
             </div>
             <div class="mb-3" id="priority">
                 <label for="task-priority" class="form-label">Priority:</label>
                 <select class="form-select" id="task-priority" required>
                     <option value="">Select Priority</option>
-                    <option value="Urgent and important">Urgent and important</option>
-                    <option value="Not urgent but important">Not urgent but important</option>
-                    <option value="Urgent but not important">Urgent but not important</option>
-                    <option value="Not urgent and not important">Not urgent and not important</option>
+                    <option value="URGENT_AND_IMPORTANT">Urgent and important</option>
+                    <option value="NOT_URGENT_BUT_IMPORTANT">Not urgent but important</option>
+                    <option value="URGENT_BUT_NOT_IMPORTANT">Urgent but not important</option>
+                    <option value="NOT_URGENT_NOT_IMPORTANT">Not urgent and not important</option>
                 </select>
             </div>
             <div class="mb-3" id="do-by">
                 <label for="task-doby" class="form-label">Do By:</label>
-                <input type="datetime-local" class="form-control" id="task-doby" required>
+                <input type="datetime-local" class="form-control" id="task-do-by" required>
             </div>
             <a href="index.html" id="create" class="btn btn-primary">Create Task</a>
         </form>

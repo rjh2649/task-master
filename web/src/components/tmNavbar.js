@@ -21,7 +21,7 @@ export default class TMNavbar extends BindingClass {
      * Add the header to the page.
      */
     async addNavbarToPage() {
-        // const currentUser = await this.client.getIdentity();
+        const currentUser = await this.client.getIdentity();
 
         // const siteTitle = this.createSiteTitle();
         // const userInfo = this.createUserInfoForHeader(currentUser);
@@ -38,17 +38,19 @@ export default class TMNavbar extends BindingClass {
                     <li class="nav-item">
                         <a class="nav-link active" href="#">Home</a>
                     </li>
-                    <li class="nav-item" id="Login">
-                        <a class="nav-link" href="">Log In</a>
-                    </li>
-                    <li class="nav-item" id="Logout">
-                        <a class="nav-link" href="">Log Out</a>
+                    <li class="nav-item" id="loginItem">
+                        
                     </li>
                 </ul>
             </div>
         </div>
     </nav>`;
         navbar.innerHTML = html;
+        
+        const userInfo = this.createUserInfoForHeader(currentUser);
+        document.getElementById('loginItem').appendChild(userInfo);
+
+        
         // header.appendChild(siteTitle);
         // header.appendChild(userInfo);
     }
@@ -89,7 +91,7 @@ export default class TMNavbar extends BindingClass {
 
     createButton(text, clickHandler) {
         const button = document.createElement('a');
-        button.classList.add('button');
+        button.classList.add('nav-link');
         button.href = '#';
         button.innerText = text;
 

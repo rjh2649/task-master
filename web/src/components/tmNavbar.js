@@ -4,12 +4,12 @@ import BindingClass from "../util/bindingClass";
 /**
  * The header component for the website.
  */
-export default class Header extends BindingClass {
+export default class TMNavbar extends BindingClass {
     constructor() {
         super();
 
         const methodsToBind = [
-            'addHeaderToPage', 'createSiteTitle', 'createUserInfoForHeader',
+            'addNavbarToPage', 'createSiteTitle', 'createUserInfoForHeader',
             'createLoginButton', 'createLoginButton', 'createLogoutButton'
         ];
         this.bindClassMethods(methodsToBind, this);
@@ -20,15 +20,39 @@ export default class Header extends BindingClass {
     /**
      * Add the header to the page.
      */
-    async addHeaderToPage() {
+    async addNavbarToPage() {
         const currentUser = await this.client.getIdentity();
 
-        const siteTitle = this.createSiteTitle();
-        const userInfo = this.createUserInfoForHeader(currentUser);
+        // const siteTitle = this.createSiteTitle();
+        // const userInfo = this.createUserInfoForHeader(currentUser);
 
-        const header = document.getElementById('header');
-        header.appendChild(siteTitle);
-        header.appendChild(userInfo);
+        const navbar = document.getElementById('tm-navbar');
+        let html = `<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand">Put some image here</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item" id="loginItem">
+                        
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>`;
+        navbar.innerHTML = html;
+        
+        const userInfo = this.createUserInfoForHeader(currentUser);
+        document.getElementById('loginItem').appendChild(userInfo);
+
+        
+        // header.appendChild(siteTitle);
+        // header.appendChild(userInfo);
     }
 
     createSiteTitle() {
@@ -67,7 +91,7 @@ export default class Header extends BindingClass {
 
     createButton(text, clickHandler) {
         const button = document.createElement('a');
-        button.classList.add('button');
+        button.classList.add('nav-link');
         button.href = '#';
         button.innerText = text;
 

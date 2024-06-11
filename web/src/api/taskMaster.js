@@ -10,12 +10,12 @@ import Authenticator from "./authenticator";
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Mix-ins
  * https://javascript.info/mixins
   */
-export default class MusicPlaylistClient extends BindingClass {
+export default class TaskMasterClient extends BindingClass {
 
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createPlaylist'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createPlaylist', 'createTask'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -69,6 +69,34 @@ export default class MusicPlaylistClient extends BindingClass {
         }
 
         return await this.authenticator.getUserToken();
+    }
+
+    /**
+     * Creates a Task for the given email and task description.
+     * @param desc the task description
+     * @param priority the task priority
+     * @param doBy when to complete the task by
+     * @returns a new task
+     */
+    async createTask(id, desc, priority, doBy, status, points, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can create tasks.");
+            const response = await this.axiosClient.post(`tasks/create`, {
+                id: id,
+                desc: desc,
+                priority: priority,
+                status: status,
+                doBy: doBy,
+                points: points
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.task;
+        } catch (error) {
+            this.handleError(error, errorCallback);
+        }
     }
 
     /**

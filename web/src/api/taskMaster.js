@@ -93,7 +93,7 @@ export default class TaskMasterClient extends BindingClass {
                     Authorization: `Bearer ${token}`
                 }
             });
-            return response.data.task;
+            return response.data.taskModel;
         } catch (error) {
             this.handleError(error, errorCallback);
         }

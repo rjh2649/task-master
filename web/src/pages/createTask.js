@@ -6,8 +6,9 @@ import TMNavbar from "../components/tmNavbar";
 class CreateTask extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'create', 'generateUniqueID', 'pointsForPriority'], this);
+        this.bindClassMethods(['mount', 'create', 'redirectToHome'], this);
         this.dataStore = new DataStore();
+        this.dataStore.addChangeListener(this.redirectToHome);
         this.navbar = new TMNavbar();
     }
 
@@ -55,22 +56,10 @@ class CreateTask extends BindingClass {
         this.dataStore.set('task', task);        
     }
 
-    async generateUniqueID() {
-        return crypto.randomUUID().toString();
-    }
-
-    async pointsForPriority(priority) {
-        switch (priority) {
-            case 'URGENT_AND_IMPORTANT':
-                return 200;
-            case 'NOT_URGENT_BUT_IMPORTANT':
-                return 150;
-            case 'URGENT_BUT_NOT_IMPORTANT':
-                return 100;
-            case 'NOT_URGENT_NOT_IMPORTANT':
-                return 50;
-            default:
-                return 0;
+    async redirectToHome() {
+        const task = this.dataStore.get('task');
+        if (task != null) {
+            window.location.href = `/index.html`;
         }
     }
 }

@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
 import com.nashss.se.taskmaster.enums.Priority;
@@ -11,6 +12,8 @@ import com.nashss.se.taskmaster.enums.Status;
 
 @DynamoDBTable(tableName = "tasks")
 public class Task {
+    private static final String STATUS_INDEX = "GetTasksByStatusIndex";
+
     private String id;
     private String desc;
     private Priority priority;
@@ -23,7 +26,7 @@ public class Task {
         return id;
     }
 
-    public void setEmail(String id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -32,7 +35,7 @@ public class Task {
         return desc;
     }
 
-    public void setTask(String desc) {
+    public void setDesc(String desc) {
         this.desc = desc;
     }
     @DynamoDBTypeConvertedEnum
@@ -55,7 +58,7 @@ public class Task {
     }
 
     @DynamoDBTypeConvertedEnum
-    @DynamoDBAttribute(attributeName = "status")
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = STATUS_INDEX, attributeName = "status")
     public Status getStatus() {
         return status;
     }

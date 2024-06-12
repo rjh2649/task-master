@@ -73,20 +73,20 @@ public class TaskModel {
     }
 
     public static class Builder {
-        private String email;
-        private String task;
+        private String id;
+        private String desc;
         private Priority priority;
         private String doBy;
         private Status status;
         private Integer points;
 
-        public Builder withEmail(String email) {
-            this.email = email;
+        public Builder withId(String id) {
+            this.id = id;
             return this;
         }
 
-        public Builder withTask(String task) {
-            this.task = task;
+        public Builder withDesc(String desc) {
+            this.desc = desc;
             return this;
         }
 
@@ -111,7 +111,7 @@ public class TaskModel {
         }
 
         public TaskModel build() {
-            return new TaskModel(email, task, priority, doBy, status, points);
+            return new TaskModel(id, desc, priority, doBy, status, points);
         }
     }
 }

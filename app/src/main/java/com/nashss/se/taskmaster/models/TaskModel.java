@@ -6,6 +6,7 @@ import com.nashss.se.taskmaster.enums.Priority;
 import com.nashss.se.taskmaster.enums.Status;
 
 public class TaskModel {
+    private final String userId;
     private final String id;
     private final String desc;
     private final Priority priority;
@@ -13,13 +14,18 @@ public class TaskModel {
     private final Status status;
     private final Integer points;
 
-    private TaskModel(String id, String desc, Priority priority, String doBy, Status status, Integer points) {
+    private TaskModel(String userId, String id, String desc, Priority priority, String doBy, Status status, Integer points) {
+        this.userId = userId;
         this.id = id;
         this.desc = desc;
         this.priority = priority;
         this.doBy = doBy;
         this.status = status;
         this.points = points;
+    }
+
+    public String getUserId(String userId) {
+        return userId;
     }
 
     public String getId() {
@@ -55,7 +61,8 @@ public class TaskModel {
             return false;
         }
         TaskModel that = (TaskModel) object;
-        return id.equals(that.id) &&
+        return userId.equals(that.userId) &&
+                id.equals(that.id) &&
                 desc.equals(that.desc) &&
                 priority.equals(that.priority) &&
                 doBy.equals(that.doBy) &&
@@ -73,12 +80,18 @@ public class TaskModel {
     }
 
     public static class Builder {
+        private String userId;
         private String id;
         private String desc;
         private Priority priority;
         private String doBy;
         private Status status;
         private Integer points;
+
+        public Builder withUserId(String userId) {
+            this.userId = userId;
+            return this;
+        } 
 
         public Builder withId(String id) {
             this.id = id;
@@ -111,7 +124,7 @@ public class TaskModel {
         }
 
         public TaskModel build() {
-            return new TaskModel(id, desc, priority, doBy, status, points);
+            return new TaskModel(userId, id, desc, priority, doBy, status, points);
         }
     }
 }

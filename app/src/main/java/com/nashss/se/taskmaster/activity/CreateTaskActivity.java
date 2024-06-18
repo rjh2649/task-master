@@ -30,6 +30,7 @@ public class CreateTaskActivity {
         log.info("Received CreateTaskRequest {}", request);
 
         Task newTask = new Task();
+        newTask.setUserId(request.getUserId());
         newTask.setId(request.getId());
         newTask.setDesc(request.getDesc());
         newTask.setPriority(request.getPriority());

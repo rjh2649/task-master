@@ -9,6 +9,7 @@ import com.nashss.se.taskmaster.models.TaskModel;
 public class ModelConverter {
     public TaskModel toTaskModel(Task task) {
         return TaskModel.builder()
+                .withUserId(task.getUserId())
                 .withId(task.getId())
                 .withDesc(task.getDesc())
                 .withPriority(task.getPriority())
@@ -23,6 +24,7 @@ public class ModelConverter {
 
         tasks.forEach(task -> {
             taskModels.add(TaskModel.builder()
+                            .withUserId(task.getUserId())
                             .withId(task.getId())
                             .withDesc(task.getDesc())
                             .withPriority(task.getPriority())

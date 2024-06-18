@@ -15,7 +15,8 @@ export default class TaskMasterClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'getPlaylist', 'getPlaylistSongs', 'createPlaylist', 'createTask'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout',
+                                'createTask', 'getTasks'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -78,10 +79,11 @@ export default class TaskMasterClient extends BindingClass {
      * @param doBy when to complete the task by
      * @returns a new task
      */
-    async createTask(id, desc, priority, doBy, status, points, errorCallback) {
+    async createTask(userId, id, desc, priority, doBy, status, points, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create tasks.");
             const response = await this.axiosClient.post(`tasks/create`, {
+                userId: userId,
                 id: id,
                 desc: desc,
                 priority: priority,
@@ -94,6 +96,48 @@ export default class TaskMasterClient extends BindingClass {
                 }
             });
             return response.data.taskModel;
+        } catch (error) {
+            this.handleError(error, errorCallback);
+        }
+    }
+
+    /**
+     * Gets all tasks for display on the homepage
+     * @param userId the user's email
+     * @param errorCallback 
+     */
+    async getTasks(userId, status, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can get tasks.");
+            if (status == "NOT_STARTED" || status == "PENDING") {
+                const response = await this.axiosClient.get(`tasks/get/${userId}/${status}`,
+                { 
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                    },
+                        params: {userId, status},
+                });
+                return response.data.pending;
+            // } else {
+            //     const response = await this.axiosClient.get(`tasks/get/${userId}/${status}`)
+            //     return response.data.completed;
+            }
+        } catch (error) {
+            this.handleError(error, errorCallback);
+        }
+    }
+    
+
+    /**
+     * Gets all completed tasks for display on the homepage
+     * @param userId the user's email
+     * @param errorCallback 
+     * @returns 
+     */
+    async getCompletedTasks(userId, errorCallback) {
+        try {
+            const response = await this.axiosClient.get(`tasks/get/${userId}&status=COMPLETED`);
+            return response.data.completed;
         } catch (error) {
             this.handleError(error, errorCallback);
         }

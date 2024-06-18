@@ -5,6 +5,7 @@ import java.util.Objects;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
 import com.nashss.se.taskmaster.enums.Priority;
@@ -14,6 +15,7 @@ import com.nashss.se.taskmaster.enums.Status;
 public class Task {
     private static final String STATUS_INDEX = "GetTasksByStatusIndex";
 
+    private String userId;
     private String id;
     private String desc;
     private Priority priority;
@@ -21,7 +23,17 @@ public class Task {
     private Status status;
     private Integer points;
 
-    @DynamoDBHashKey(attributeName = "task_ID")
+
+    @DynamoDBHashKey(attributeName = "user_ID")
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    @DynamoDBRangeKey(attributeName = "task_ID")
     public String getId() {
         return id;
     }
@@ -85,7 +97,8 @@ public class Task {
             return false;
         }
         Task that = (Task) object;
-        return id.equals(that.id) &&
+        return  userId.equals(that.userId) &&
+                id.equals(that.id) &&
                 desc.equals(that.desc) &&
                 priority.equals(that.priority) &&
                 doBy.equals(that.doBy) &&
@@ -95,6 +108,6 @@ public class Task {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, desc, priority, doBy, status, points);
+        return Objects.hash(userId, id, desc, priority, doBy, status, points);
     }
 }

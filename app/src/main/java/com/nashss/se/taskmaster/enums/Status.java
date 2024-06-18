@@ -1,14 +1,19 @@
 package com.nashss.se.taskmaster.enums;
 
 public enum Status {
-    NOT_STARTED("Not started"),
-    PENDING("Pending"),
-    COMPLETED("Completed");
+    NOT_STARTED("NOT_STARTED"),
+    PENDING("PENDING"),
+    COMPLETED("COMPLETED");
 
     private final String status;
     
     Status(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return status;
     }
 
     public Status getDefault() {

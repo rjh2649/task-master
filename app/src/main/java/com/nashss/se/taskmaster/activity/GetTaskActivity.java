@@ -8,10 +8,12 @@ import javax.inject.Inject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.nashss.se.taskmaster.activity.request.GetTaskRequest;
 import com.nashss.se.taskmaster.activity.result.GetTaskResult;
 import com.nashss.se.taskmaster.converters.ModelConverter;
 import com.nashss.se.taskmaster.dynamodb.Task;
 import com.nashss.se.taskmaster.dynamodb.dao.TaskDao;
+import com.nashss.se.taskmaster.enums.Status;
 import com.nashss.se.taskmaster.models.TaskModel;
 
 public class GetTaskActivity {
@@ -27,23 +29,24 @@ public class GetTaskActivity {
      * Gets all Tasks and organizes them based on status
      * @return GetTaskResult
      */
-    public GetTaskResult handleRequest() {
-        log.info("Received GetTaskRequest");
-        
-        List<Task> pendingTasks = dao.getTasksByStatus("NOT_STARTED", "PENDING");
-        List<Task> completedTasks = dao.getTasksByStatus("COMPLETED");
+    public GetTaskResult handleRequest(final GetTaskRequest request) {
+        log.info("Received GetTaskRequests");
 
-        List<TaskModel> pendingModels = pendingTasks.stream()
-                .map(task -> new ModelConverter().toTaskModel(task))
-                .collect(Collectors.toList());
-        
+        List<Task> pendingTasks = new ArrayList<>();
+        List<Task> completedTasks = new ArrayList<>();
+
+        List<TaskModel> pendingModels = new ArrayList<>();
         List<TaskModel> completedModels = new ArrayList<>();
-        if (!completedTasks.isEmpty()) {
-            completedModels = completedTasks.stream()
-                    .map(task -> new ModelConverter().toTaskModel(task))
-                    .collect(Collectors.toList());
+
+        if (request.getStatus().equals(Status.NOT_STARTED) || request.getStatus().equals(Status.PENDING)) {
+            pendingTasks = dao.getTasksByStatus(request.getUserId(), request.getStatus().toString());
+            pendingModels = new ModelConverter().toTaskModelList(pendingTasks);
         }
 
+        if (request.getStatus().equals(Status.COMPLETED)) {
+            completedTasks = dao.getTasksByStatus(request.getUserId(), request.getStatus().toString());
+            completedModels = new ModelConverter().toTaskModelList(completedTasks);
+        }
         
         return GetTaskResult.builder()
                 .withPendingTasks(pendingModels)

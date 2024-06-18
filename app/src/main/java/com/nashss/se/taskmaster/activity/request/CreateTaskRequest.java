@@ -9,6 +9,7 @@ import com.nashss.se.taskmaster.enums.Status;
 
 @JsonDeserialize(builder = CreateTaskRequest.Builder.class)
 public class CreateTaskRequest {
+    private final String userId;
     private final String id;
     private final String desc;
     private final Priority priority;
@@ -16,13 +17,18 @@ public class CreateTaskRequest {
     private final Status status;
     private final Integer points;
 
-    private CreateTaskRequest(String id, String desc, Priority priority, String doBy, Status status, Integer points) {
+    private CreateTaskRequest(String userId, String id, String desc, Priority priority, String doBy, Status status, Integer points) {
+        this.userId = userId;
         this.id = UUID.randomUUID().toString();
         this.desc = desc;
         this.priority = priority;
         this.doBy = doBy;
         this.status = status.getDefault();
         this.points = priority.getPointsForPriority();
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     public String getId() {
@@ -52,6 +58,7 @@ public class CreateTaskRequest {
     @Override
     public String toString() {
         return "CreateTaskRequest{" +
+        "email='" + userId + '\'' +
         "id='" + id + '\'' +
         "description'" + desc + '\'' +
         "priority='" + priority + '\'' +
@@ -67,12 +74,18 @@ public class CreateTaskRequest {
 
     @JsonPOJOBuilder
     public static class Builder {
+        private String userId;
         private String id;
         private String desc;
         private Priority priority;
         private String doBy;
         private Status status;
         private Integer points;
+
+        public Builder withUserId(String userId) {
+            this.userId = userId;
+            return this;
+        }
 
         public Builder withId(String id) {
             this.id = id;
@@ -106,7 +119,7 @@ public class CreateTaskRequest {
 
         public CreateTaskRequest build() {
             System.out.println("Building request...");
-            CreateTaskRequest request = new CreateTaskRequest(id, desc, priority, doBy, status, points);
+            CreateTaskRequest request = new CreateTaskRequest(userId, id, desc, priority, doBy, status, points);
             System.out.println(request);
             return request;
         }

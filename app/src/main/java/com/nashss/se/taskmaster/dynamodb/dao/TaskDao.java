@@ -7,8 +7,6 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import org.checkerframework.checker.units.qual.A;
-
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
@@ -47,25 +45,37 @@ public class TaskDao {
      * @param statuses One or more Status values to query by
      * @return a List of Tasks with the specifed status or statuses
      */
-    public List<Task> getTasksByStatus(String... statuses) {
+    public List<Task> getTasksByStatus(String userId, String... statuses) {
         Map<String, AttributeValue> valueMap = new HashMap<>();
+        Map<String, String> nameMap = new HashMap<>();
+        //user_ID = :u AND (status = :s0 OR status = :s1 OR status = :s2)
 
-        String keyConditionExpression = "status IN (";
+        String keyConditionExpressionFormat = "user_ID = :u AND (%s)";
+        String statusFormat = "#s = %s";
+        String status = ":s";
         for (int i = 0; i < statuses.length; i++) {
-            String attributeName = ":status" + i;
-            valueMap.put(attributeName, new AttributeValue().withS(statuses[i]));
-            keyConditionExpression += attributeName;
-            if (i < statuses.length - 1) {
-                keyConditionExpression += ", ";
-            } 
+            statusFormat = String.format(statusFormat, (status + i));
+            valueMap.put(status + i, new AttributeValue().withS(statuses[i]));
+            if (i < statuses.length) {
+                statusFormat += " OR #s = :s" + (i + 1);
+            }
+            nameMap.put("#s", "status"); 
         }
-        keyConditionExpression += ")";
+        valueMap.put(":userId", new AttributeValue().withS(userId));
+
+        String keyConditionExpression = 
+                String.format(keyConditionExpressionFormat, String.format(statusFormat, status));
+
+        System.out.println(valueMap);
+        System.out.println(nameMap);
+        System.out.println(keyConditionExpression);
 
         DynamoDBQueryExpression<Task> queryExpression = new DynamoDBQueryExpression<Task>()
                 .withIndexName("GetTasksByStatusIndex")
                 .withConsistentRead(false)
                 .withKeyConditionExpression(keyConditionExpression)
-                .withExpressionAttributeValues(valueMap);
+                .withExpressionAttributeValues(valueMap)
+                .withExpressionAttributeNames(nameMap);
 
         return mapper.query(Task.class, queryExpression);
     }

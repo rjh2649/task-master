@@ -27,15 +27,7 @@ class CreateTask extends BindingClass {
         errorMessage.innerText = ``;
         errorMessage.classList.add('hidden');
 
-        // const taskData = {
-        //     id: this.generateUniqueID(),
-        //     desc: document.getElementById('description').value,
-        //     priority: document.getElementById('priority').value,
-        //     doBy: document.getElementById('do-by').value,
-        //     status: 'NOT_STARTED',
-        //     points: this.pointsForPriority(document.getElementById('priority').value)
-        // }
-
+        let userId;
         let id;
         const desc = document.getElementById('desc').value;
         const priority = document.getElementById('task-priority').value;
@@ -47,11 +39,11 @@ class CreateTask extends BindingClass {
         const originalButtonText = createButton.innerText
         createButton.innerText = 'Loading . . .';
 
-        const task = await this.client.createTask(id, desc, priority, doBy, status, points, (error) => {
+        const task = await this.client.createTask(userId, id, desc, priority, doBy, status, points, (error) => {
             createButton.innerText = originalButtonText;
             errorMessage.innerText = `Error: ${error.message}`;
             errorMessage.classList.remove('hidden');
-        })
+        });
 
         this.dataStore.set('task', task);        
     }

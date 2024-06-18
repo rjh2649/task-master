@@ -3,7 +3,9 @@ package com.nashss.se.taskmaster.converters;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.nashss.se.taskmaster.dynamodb.Reward;
 import com.nashss.se.taskmaster.dynamodb.Task;
+import com.nashss.se.taskmaster.models.RewardModel;
 import com.nashss.se.taskmaster.models.TaskModel;
 
 public class ModelConverter {
@@ -35,5 +37,14 @@ public class ModelConverter {
         });
 
         return taskModels;
+    }
+
+    public RewardModel toRewardModel(Reward reward) {
+        return RewardModel.builder()
+                .withUserId(reward.getUserId())
+                .withRewardId(reward.getRewardId())
+                .withDesc(reward.getDesc())
+                .withPointsNeeded(reward.getPointsNeeded())
+                .build();
     }
 }

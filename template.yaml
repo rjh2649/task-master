@@ -223,6 +223,17 @@ Resources:
             - Effect: Allow
               Action: dynamodb:*
               Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/tasks"
+            - Effect: Allow
+              Action: dynamodb:*
+              Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/tasks/index/GetTasksByStatusIndex"
+        
+        - PolicyName: 'AccessRewardsTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+            - Effect: Allow
+              Action: dynamodb:*
+              Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/rewards"
 
   #-----------------------------------------------------
   # Lambda Functions Configuration
@@ -302,6 +313,22 @@ Resources:
               KeyType: "RANGE"
           Projection:
             ProjectionType: "ALL"
+
+  RewardsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "user_ID"
+          AttributeType: "S"
+        - AttributeName: "reward_ID"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "user_ID"
+          KeyType: "HASH"
+        - AttributeName: "reward_ID"
+          KeyType: "RANGE"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "rewards"
 
 #-----------------------------------------------------
 # The outputs defined below will be printed

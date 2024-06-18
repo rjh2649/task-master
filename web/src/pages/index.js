@@ -44,7 +44,7 @@ class Index extends BindingClass {
             const row = document.createElement('tr');
 
             const description = document.createElement('td');
-            description.textContent = task.description;
+            description.textContent = task.desc;
             row.appendChild(description);
 
             const priority = document.createElement('td');

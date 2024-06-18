@@ -23,6 +23,7 @@ public class CreateTaskLambda
 
                 return input.fromUserClaims(claims -> CreateTaskRequest.builder()
                             .withUserId(claims.get("email"))
+                            .withDesc(unauthenticatedRequest.getDesc())
                             .withId(id)
                             .withPriority(unauthenticatedRequest.getPriority())
                             .withDoBy(unauthenticatedRequest.getDoBy())

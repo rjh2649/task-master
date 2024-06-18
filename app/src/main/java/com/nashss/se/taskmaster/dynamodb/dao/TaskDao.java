@@ -50,13 +50,13 @@ public class TaskDao {
         Map<String, String> nameMap = new HashMap<>();
         //user_ID = :u AND (status = :s0 OR status = :s1 OR status = :s2)
 
-        String keyConditionExpressionFormat = "user_ID = :u AND (%s)";
+        String keyConditionExpressionFormat = "user_ID = :userId AND (%s)";
         String statusFormat = "#s = %s";
         String status = ":s";
         for (int i = 0; i < statuses.length; i++) {
             statusFormat = String.format(statusFormat, (status + i));
             valueMap.put(status + i, new AttributeValue().withS(statuses[i]));
-            if (i < statuses.length) {
+            if (i > 1) {
                 statusFormat += " OR #s = :s" + (i + 1);
             }
             nameMap.put("#s", "status"); 

@@ -1,7 +1,6 @@
 package com.nashss.se.taskmaster.activity;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 

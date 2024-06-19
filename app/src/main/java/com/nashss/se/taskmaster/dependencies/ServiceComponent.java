@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import com.nashss.se.taskmaster.activity.CreateTaskActivity;
 import com.nashss.se.taskmaster.activity.GetTaskActivity;
+import com.nashss.se.taskmaster.activity.UpdateTaskActivity;
 
 import dagger.Component;
 
@@ -13,4 +14,6 @@ public interface ServiceComponent {
     CreateTaskActivity provideCreateTaskActivity();
 
     GetTaskActivity provideGetTaskActivity();
+
+    UpdateTaskActivity provideUpdateTaskActivity();
 }

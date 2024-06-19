@@ -10,11 +10,13 @@ export default class TMNavbar extends BindingClass {
 
         const methodsToBind = [
             'addNavbarToPage', 'createSiteTitle', 'createUserInfoForHeader',
-            'createLoginButton', 'createLoginButton', 'createLogoutButton'
+            'createLoginButton', 'createLoginButton', 'createLogoutButton',
+            'createHomeButton'
         ];
         this.bindClassMethods(methodsToBind, this);
 
         this.client = new TaskMasterClient();
+        
     }
 
     /**
@@ -22,9 +24,7 @@ export default class TMNavbar extends BindingClass {
      */
     async addNavbarToPage() {
         const currentUser = await this.client.getIdentity();
-
-        // const siteTitle = this.createSiteTitle();
-        // const userInfo = this.createUserInfoForHeader(currentUser);
+        const homeButton = this.createHomeButton();
 
         const navbar = document.getElementById('tm-navbar');
         let html = `<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -35,8 +35,8 @@ export default class TMNavbar extends BindingClass {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Home</a>
+                    <li class="nav-item" id="navbarHome">
+
                     </li>
                     <li class="nav-item" id="loginItem">
                         
@@ -49,6 +49,7 @@ export default class TMNavbar extends BindingClass {
         
         const userInfo = this.createUserInfoForHeader(currentUser);
         document.getElementById('loginItem').appendChild(userInfo);
+        document.getElementById('navbarHome').appendChild(homeButton);
 
         
         // header.appendChild(siteTitle);
@@ -98,6 +99,20 @@ export default class TMNavbar extends BindingClass {
         button.addEventListener('click', async () => {
             await clickHandler();
         });
+
+        return button;
+    }
+
+    createHomeButton() {
+        const button = document.createElement('a');
+        button.classList.add('nav-link');
+        button.href = `/index.html`;
+        button.innerText = `Home`;
+
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            window.location.href = button.href;
+        })
 
         return button;
     }

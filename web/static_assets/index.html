@@ -50,27 +50,38 @@
         </div>
 
         <div class="row mt-4">
-            <div class="col-md-6" id="current-tasks">
+            <div class="col-md-5" id="current-tasks">
                 <h3>Current Tasks</h3>
                 <table class="table table-striped">
                   <thead>
-                    <tr>
-                      <th>Task Description</th>
-                      <th>Priority</th>
-                      <th>Do By:</th>
-                      <th>Status</th>
-                      <th>Points</th>
-                    </tr>
+                        <tr>
+                            <th>Task Description</th>
+                            <th>Priority</th>
+                            <th>Do By:</th>
+                            <th>Status</th>
+                            <th>Points</th>
+                        </tr>
                   </thead>
-                  <tbody id="task-table-body">
-                    <!-- Task rows will be dynamically added here using JavaScript -->
+                  <tbody id="current-task-table-body">
                   </tbody>
                 </table>
-                <p class="hidden-error" id="error-message"></p>
+                <p class="hidden-error" id="error-message1"></p>
               </div>
-            <div class="col-md-6" id="completed-tasks">
+            <div class="col-md-5" id="completed-tasks">
                 <h3>Completed Tasks</h3>
-                <p>placeholder</p>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Task Description</th>
+                            <th>Priority</th>
+                            <th>Do By:</th>
+                            <th>Status</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody id="completed-task-table-body"></tbody>
+                </table>
+                <p class="hidden-error" id="error-message2"></p>
             </div>
         </div>
     </div>

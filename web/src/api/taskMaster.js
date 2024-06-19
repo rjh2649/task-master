@@ -108,6 +108,7 @@ export default class TaskMasterClient extends BindingClass {
      */
     async getTasks(userId, status, errorCallback) {
         try {
+            var emptyList = [];
             const token = await this.getTokenOrThrow("Only authenticated users can get tasks.");
             if (status == "NOT_STARTED" || status == "PENDING") {
                 const response = await this.axiosClient.get(`tasks/get/${userId}/${status}`,
@@ -115,18 +116,33 @@ export default class TaskMasterClient extends BindingClass {
                         headers: {
                             Authorization: `Bearer ${token}`
                     },
-                        params: {userId, status},
+                        params: {userId, status}
                 });
-                return response.data.pending;
-            // } else {
-            //     const response = await this.axiosClient.get(`tasks/get/${userId}/${status}`)
-            //     return response.data.completed;
+                if (response.data.pending != null) {
+                    return response.data.pending;
+                } else {
+                    return emptyList;
+                }
             }
+            if (status == "COMPLETED") {
+                const response = await this.axiosClient.get(`tasks/get/${userId}/${status}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        },
+                        params: {userId, status}
+                    }
+                );
+                if (response.data.completed != null) {
+                    return response.data.completed;
+                } else {
+                    return emptyList;
+                }
+            } 
         } catch (error) {
             this.handleError(error, errorCallback);
         }
     }
-    
 
     /**
      * Gets all completed tasks for display on the homepage

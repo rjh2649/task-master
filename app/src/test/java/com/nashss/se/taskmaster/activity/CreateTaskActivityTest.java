@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -23,6 +24,7 @@ public class CreateTaskActivityTest {
     @Mock
     private TaskDao dao;
 
+    @InjectMocks
     private CreateTaskActivity activity;
 
     @BeforeEach

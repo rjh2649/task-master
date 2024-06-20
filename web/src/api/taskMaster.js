@@ -16,7 +16,7 @@ export default class TaskMasterClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout',
-                                'createTask', 'getTasks'];
+                                'createTask', 'getTasks', 'updateTask'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -72,6 +72,40 @@ export default class TaskMasterClient extends BindingClass {
         return await this.authenticator.getUserToken();
     }
 
+
+    /**
+     * Allows the user to edit values on existing task
+     * @param userId 
+     * @param id 
+     * @param desc 
+     * @param priority 
+     * @param doBy 
+     * @param status 
+     * @param points 
+     * @param errorCallback 
+     */
+    async updateTask(userId, id, desc, priority, doBy, status, points, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can update tasks.");
+            const response = await this.axiosClient.put('tasks/edit', {
+                userId: userId,
+                id: id,
+                desc: desc,
+                priority: priority,
+                doBy: doBy,
+                status: status,
+                points: points
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.taskModel;
+        } catch (error) {
+            this.handleError(error, errorCallback);
+        }
+    }
+
     /**
      * Creates a Task for the given email and task description.
      * @param desc the task description
@@ -108,7 +142,6 @@ export default class TaskMasterClient extends BindingClass {
      */
     async getTasks(userId, status, errorCallback) {
         try {
-            var emptyList = [];
             const token = await this.getTokenOrThrow("Only authenticated users can get tasks.");
             if (status == "NOT_STARTED" || status == "PENDING") {
                 const response = await this.axiosClient.get(`tasks/get/${userId}/${status}`,
@@ -121,7 +154,7 @@ export default class TaskMasterClient extends BindingClass {
                 if (response.data.pending != null) {
                     return response.data.pending;
                 } else {
-                    return emptyList;
+                    return;
                 }
             }
             if (status == "COMPLETED") {
@@ -136,24 +169,9 @@ export default class TaskMasterClient extends BindingClass {
                 if (response.data.completed != null) {
                     return response.data.completed;
                 } else {
-                    return emptyList;
+                    return;
                 }
             } 
-        } catch (error) {
-            this.handleError(error, errorCallback);
-        }
-    }
-
-    /**
-     * Gets all completed tasks for display on the homepage
-     * @param userId the user's email
-     * @param errorCallback 
-     * @returns 
-     */
-    async getCompletedTasks(userId, errorCallback) {
-        try {
-            const response = await this.axiosClient.get(`tasks/get/${userId}&status=COMPLETED`);
-            return response.data.completed;
         } catch (error) {
             this.handleError(error, errorCallback);
         }

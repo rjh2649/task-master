@@ -22,22 +22,32 @@ public class TaskDao {
     }
 
     /**
-     * Loads a Task from DynamoDB via TaskId
-     * @param taskId the name of the task
+     * Loads a Task from DynamoDB via user's email
+     * @param userId the user's email
      * @return Task
      */
-    public Task getTask(String taskId) {
-        if (taskId == null) {
-            throw new RuntimeException();
-        }
+    public List<Task> getTasksByUser(String userId) {
+        Task task = new Task();
+        task.setUserId(userId);
 
-        Task task = mapper.load(Task.class, taskId);
+        DynamoDBQueryExpression<Task> queryExpression = new DynamoDBQueryExpression<Task>()
+                .withHashKeyValues(task);
 
-        if (task == null) {
-            throw new RuntimeException();
-        }
+        
+        // if (task == null) {
+        //     throw new IdNotFoundException("Tasks could not be founf with userId: " + userId);
+        // }
+        return mapper.query(Task.class, queryExpression);
+    }
 
-        return task;
+
+    /**
+     * Returns a task based off of the unique taskId
+     * @param taskId
+     * @return the specified task
+     */
+    public Task getTaskByTaskId(String userId, String taskId) {
+        return mapper.load(Task.class, userId, taskId);
     }
 
     /**

@@ -24,7 +24,7 @@ public class TaskModel {
         this.points = points;
     }
 
-    public String getUserId(String userId) {
+    public String getUserId() {
         return userId;
     }
 

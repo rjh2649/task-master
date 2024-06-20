@@ -28,6 +28,7 @@ module.exports = {
     viewPlaylist: path.resolve(__dirname, 'src', 'pages', 'viewPlaylist.js'),
     searchPlaylists: path.resolve(__dirname, 'src', 'pages', 'searchPlaylists.js'),
     createTask: path.resolve(__dirname, 'src', 'pages', 'createTask.js'),
+    updateTask: path.resolve(__dirname, 'src', 'pages', 'updateTask.js'),
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),

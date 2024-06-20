@@ -1,14 +1,12 @@
 package com.nashss.se.taskmaster.activity.request;
 
-import java.util.UUID;
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.nashss.se.taskmaster.enums.Priority;
 import com.nashss.se.taskmaster.enums.Status;
 
-@JsonDeserialize(builder = CreateTaskRequest.Builder.class)
-public class CreateTaskRequest {
+@JsonDeserialize(builder = UpdateTaskRequest.Builder.class)
+public class UpdateTaskRequest {
     private final String userId;
     private final String id;
     private final String desc;
@@ -17,9 +15,9 @@ public class CreateTaskRequest {
     private final Status status;
     private final Integer points;
 
-    private CreateTaskRequest(String userId, String id, String desc, Priority priority, String doBy, Status status, Integer points) {
+    private UpdateTaskRequest(String userId, String id, String desc, Priority priority, String doBy, Status status, Integer points) {
         this.userId = userId;
-        this.id = UUID.randomUUID().toString();
+        this.id = id;
         this.desc = desc;
         this.priority = priority;
         this.doBy = doBy;
@@ -57,9 +55,9 @@ public class CreateTaskRequest {
 
     @Override
     public String toString() {
-        return "CreateTaskRequest{" +
-        "email='" + userId + '\'' +
-        "id='" + id + '\'' +
+        return "UpdateTaskRequest{" +
+        "userId='" + userId + '\'' +
+        "taskId='" + id + '\'' +
         "description'" + desc + '\'' +
         "priority='" + priority + '\'' +
         "doBy='" + doBy + '\'' +
@@ -117,9 +115,9 @@ public class CreateTaskRequest {
             return this;
         }
 
-        public CreateTaskRequest build() {
+        public UpdateTaskRequest build() {
             System.out.println("Building request...");
-            CreateTaskRequest request = new CreateTaskRequest(userId, id, desc, priority, doBy, status, points);
+            UpdateTaskRequest request = new UpdateTaskRequest(userId, id, desc, priority, doBy, status, points);
             System.out.println(request);
             return request;
         }

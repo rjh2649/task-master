@@ -1,7 +1,7 @@
-import DataStore from "../util/DataStore";
 import BindingClass from "../util/bindingClass";
 import TaskMasterClient from "../api/taskMaster";
 import TMNavbar from "../components/tmNavbar";
+import DataStore from "../util/DataStore";
 
 class CreateTask extends BindingClass {
     constructor() {
@@ -36,7 +36,7 @@ class CreateTask extends BindingClass {
         let points;
         
         const createButton = document.getElementById('create');
-        const originalButtonText = createButton.innerText
+        const originalButtonText = createButton.innerText;
         createButton.innerText = 'Loading . . .';
 
         const task = await this.client.createTask(userId, id, desc, priority, doBy, status, points, (error) => {

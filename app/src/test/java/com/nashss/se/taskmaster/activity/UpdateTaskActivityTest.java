@@ -64,7 +64,7 @@ public class UpdateTaskActivityTest {
         toUpdate.setStatus(Status.PENDING);
         toUpdate.setPoints(points);
 
-        when(dao.getTasksByUser(userId)).thenReturn(new ArrayList<Task>(Collections.singleton(toUpdate)));
+        when(dao.getTaskByTaskId(userId, taskId)).thenReturn(toUpdate);
 
         // WHEN
         UpdateTaskResult result = activity.handleRequest(request);

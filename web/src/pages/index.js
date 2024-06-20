@@ -1,8 +1,8 @@
 import Authenticator from "../api/authenticator";
 import BindingClass from "../util/bindingClass";
-import DataStore from "../util/DataStore";
 import TMNavbar from "../components/tmNavbar";
 import TaskMasterClient from "../api/taskMaster";
+import DataStore from "../util/DataStore";
 
 class Index extends BindingClass {
 
@@ -20,6 +20,7 @@ class Index extends BindingClass {
         this.navbar.createLoginButton();
         this.navbar.createLogoutButton(this.client.getIdentity());
         this.getPendingTasks();
+        this.getCompletedTasks();
     }
 
     async getPendingTasks() {
@@ -30,9 +31,7 @@ class Index extends BindingClass {
         const userId = (await this.auth.getCurrentUserInfo()).email;
         const status = "NOT_STARTED";
 
-        var pendingTasks = [];
-
-        pendingTasks = await this.client.getTasks(userId, status, (error) => {
+        const pendingTasks = await this.client.getTasks(userId, status, (error) => {
             errorMessage.innerText = `Error: ${error.message}`;
             errorMessage.classList.remove('hidden');
         });
@@ -41,29 +40,8 @@ class Index extends BindingClass {
 
         const tableBody = document.getElementById('current-task-table-body');
         pendingTasks.forEach(task => {
-            const row = document.createElement('tr');
-
-            const description = document.createElement('td');
-            description.textContent = task.desc;
-            row.appendChild(description);
-
-            const priority = document.createElement('td');
-            priority.textContent = task.priority;
-            row.appendChild(priority);
-
-            const doBy = document.createElement('td');
-            doBy.textContent = task.doBy;
-            row.appendChild(doBy);
-
-            const status = document.createElement('td');
-            status.textContent = task.status;
-            row.appendChild(status);
-
-            const points = document.createElement('td');
-            points.textContent = task.points;
-            row.appendChild(points);
-
-            tableBody.appendChild(row);
+            const row = this.generateRow(task);
+            tableBody.insertAdjacentHTML('beforeend', row);
         });
     }
 
@@ -75,9 +53,7 @@ class Index extends BindingClass {
         const userId = (await this.auth.getCurrentUserInfo()).email;
         const status = "COMPLETED";
 
-        var completedTasks = [];
-
-        completedTasks = await this.client.getTasks(userId, status, (error) => {
+        const completedTasks = await this.client.getTasks(userId, status, (error) => {
             errorMessage.innerText = `Error: ${error.message}`;
             errorMessage.classList.remove('hidden');
         });
@@ -86,30 +62,33 @@ class Index extends BindingClass {
 
         const tableBody = document.getElementById('completed-task-table-body');
         completedTasks.forEach(task => {
-            const row = document.createElement('tr');
+            const row = this.generateRow(task);
+            tableBody.insertAdjacentHTML('beforeend', row);
+        });
+    }
 
-            const description = document.createElement('td');
-            description.textContent = task.desc;
-            row.appendChild(description);
-
-            const priority = document.createElement('td');
-            priority.textContent = task.priority;
-            row.appendChild(priority);
-
-            const doBy = document.createElement('td');
-            doBy.textContent = task.doBy;
-            row.appendChild(doBy);
-
-            const status = document.createElement('td');
-            status.textContent = task.status;
-            row.appendChild(status);
-
-            const points = document.createElement('td');
-            points.textContent = task.points;
-            row.appendChild(points);
-
-            tableBody.appendChild(row);
-        })
+    generateRow(task) {
+        const row = `
+        <tr data-task-id="${task.id}">
+            <td>${task.desc}</td>
+            <td>${task.priority}</td>
+            <td>${task.doBy}</td>
+            <td>${task.status}</td>
+            <td>${task.points}</td>
+            <td class="text-end">
+                <div class="btn-group dropend">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        Actions
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/updateTask.html?userId=${task.userId}&taskId=${task.id}&desc=${task.desc}&priority=${task.priority}&doBy=${task.doBy}&status=${task.status}&points=${task.points}" data-action="update">Update Task</a></li>
+                        <li><a class="dropdown-item" href="#" data-task-id="${task.id}">Delete Task</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    `;
+    return row;
     }
 }
 

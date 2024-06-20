@@ -300,7 +300,7 @@ Resources:
         app:
           Type: Api
           Properties:
-            Path: /tasks/edit
+            Path: /tasks/edit/
             Method: put
             # Auth:
             #   Authorizer: 'NONE'

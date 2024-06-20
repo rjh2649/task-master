@@ -11,7 +11,6 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.nashss.se.taskmaster.dynamodb.Task;
-import com.nashss.se.taskmaster.exceptions.IdNotFoundException;
 
 @Singleton
 public class TaskDao {
@@ -39,6 +38,16 @@ public class TaskDao {
         //     throw new IdNotFoundException("Tasks could not be founf with userId: " + userId);
         // }
         return mapper.query(Task.class, queryExpression);
+    }
+
+
+    /**
+     * Returns a task based off of the unique taskId
+     * @param taskId
+     * @return the specified task
+     */
+    public Task getTaskByTaskId(String userId, String taskId) {
+        return mapper.load(Task.class, userId, taskId);
     }
 
     /**

@@ -12,9 +12,10 @@ public class UpdateTaskLambda
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<UpdateTaskRequest> input, Context context) {
         return super.runActivity(() -> {
             UpdateTaskRequest unauthenticatedRequest = input.fromBody(UpdateTaskRequest.class);
+            
+            System.out.println(unauthenticatedRequest.getId() + ": print 1");
 
-            return input.fromUserClaims(claims -> 
-                UpdateTaskRequest.builder()
+            return input.fromUserClaims(claims -> UpdateTaskRequest.builder()
                         .withUserId(claims.get("email"))
                         .withId(unauthenticatedRequest.getId())
                         .withDesc(unauthenticatedRequest.getDesc())

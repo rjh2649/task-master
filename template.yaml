@@ -322,10 +322,10 @@ Resources:
         app:
           Type: Api
           Properties:
-            Path: /tasks/delete/
+            Path: /tasks/delete/{userId}/{taskId}
             Method: delete
-            # Auth:
-            #   Authorizer: 'NONE'
+            Auth:
+              Authorizer: 'NONE'
 
   #-----------------------------------------------------
   # DynamoDB Configuration

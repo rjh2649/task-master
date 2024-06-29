@@ -9,7 +9,7 @@ class Index extends BindingClass {
     constructor() {
         super();
         this.auth = new Authenticator();
-        this.bindClassMethods = (['mount', 'getPendingTasks', 'getCompletedTasks'], this);
+        this.bindClassMethods = (['mount', 'getPendingTasks', 'getCompletedTasks', 'delete'], this);
         this.dataStore = new DataStore();
         this.navbar = new TMNavbar();
         this.client = new TaskMasterClient();
@@ -21,6 +21,15 @@ class Index extends BindingClass {
         this.navbar.createLogoutButton(this.client.getIdentity());
         this.getPendingTasks();
         this.getCompletedTasks();
+
+        document.addEventListener('click', async (event) => {
+            if (event.target && event.target.getAttribute('data-action') === 'delete') {
+                event.preventDefault();
+                const userId = event.target.getAttribute('data-user-id');
+                const taskId = event.target.getAttribute('data-task-id');
+                await this.delete(userId, taskId);
+            }
+        });
     }
 
     async getPendingTasks() {
@@ -67,6 +76,45 @@ class Index extends BindingClass {
         });
     }
 
+    // async delete() {
+    //     // debugger;
+    //     const urlParams = new URLSearchParams(window.location.search);
+    //     const userId = urlParams.get("userId");
+    //     const id = urlParams.get("taskId");
+
+    //     const errorMessage = document.getElementById('error-message2');
+    //     errorMessage.innerText = ``;
+    //     errorMessage.classList.add('hidden');
+
+    //     const deletedTask = await this.client.deleteTask(userId, id, (error) => {
+    //         errorMessage.innerText = `Error: ${error.message}`;
+    //         errorMessage.classList.remove('hidden');
+    //     });
+
+    //     this.dataStore.set('deleted-task', deletedTask);
+    // }   
+
+    async delete(userId, taskId) {
+            const errorMessage = document.getElementById('error-message2');
+            errorMessage.innerText = ``;
+            errorMessage.classList.add('hidden');
+
+            const deletedTask = await this.client.deleteTask(userId, taskId, (error) => {
+                errorMessage.innerText = `Error: ${error.message}`;
+                errorMessage.classList.remove('hidden');
+            });
+
+            this.dataStore.set('deleted-task', deletedTask);
+
+            const taskRow = document.querySelector(`tr[data-task-id="${taskId}"]`);
+            if (taskRow) {
+                taskRow.remove();
+            }
+
+            // await this.getPendingTasks();
+            // await this.getCompletedTasks();
+    }
+
     generateRow(task) {
         const row = `
         <tr data-task-id="${task.id}">
@@ -82,7 +130,7 @@ class Index extends BindingClass {
                     </button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/updateTask.html?userId=${task.userId}&taskId=${task.id}&desc=${task.desc}&priority=${task.priority}&doBy=${task.doBy}&status=${task.status}&points=${task.points}" data-action="update">Update Task</a></li>
-                        <li><a class="dropdown-item" href="#" data-task-id="${task.id}">Delete Task</a></li>
+                        <li><a class="dropdown-item" href="#" data-action="delete" data-user-id="${task.userId}" data-task-id="${task.id}">Delete Task</a></li>
                     </ul>
                 </div>
             </td>

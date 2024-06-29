@@ -16,7 +16,7 @@ export default class TaskMasterClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout',
-                                'createTask', 'getTasks', 'updateTask'];
+                                'createTask', 'getTasks', 'updateTask', 'deleteTask'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -72,6 +72,27 @@ export default class TaskMasterClient extends BindingClass {
         return await this.authenticator.getUserToken();
     }
 
+
+    /**
+     * 
+     * @param userId 
+     * @param id 
+     * @param errorCallback 
+     * @returns 
+     */
+    async deleteTask(userId, id, errorCallback) {
+        try {
+            const token = this.getTokenOrThrow("Only authenticated users can delete tasks.");
+            const response = await this.axiosClient.delete(`tasks/delete/${userId}/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.taskModel;
+        } catch (error) {
+            this.handleError(error, errorCallback);
+        }
+    }
 
     /**
      * Allows the user to edit values on existing task

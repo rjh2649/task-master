@@ -47,4 +47,19 @@ public class ModelConverter {
                 .withPointsNeeded(reward.getPointsNeeded())
                 .build();
     }
+
+    public List<RewardModel> toRewardModels(List<Reward> rewards) {
+        List<RewardModel> rewardModels = new ArrayList<>();
+
+        rewards.forEach(reward -> {
+            rewardModels.add(RewardModel.builder()
+                            .withUserId(reward.getUserId())
+                            .withRewardId(reward.getRewardId())
+                            .withDesc(reward.getDesc())
+                            .withPointsNeeded(reward.getPointsNeeded())
+                            .build());
+        });
+
+        return rewardModels;
+    }
 }

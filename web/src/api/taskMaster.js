@@ -16,7 +16,8 @@ export default class TaskMasterClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout',
-                                'createTask', 'getTasks', 'updateTask', 'deleteTask'];
+                                'createTask', 'getTasks', 'updateTask', 'deleteTask',
+                                'createReward'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -72,6 +73,32 @@ export default class TaskMasterClient extends BindingClass {
         return await this.authenticator.getUserToken();
     }
 
+    /**
+     * 
+     * @param  userId 
+     * @param  rewardId 
+     * @param  desc 
+     * @param  pointsNeeded 
+     * @returns 
+     */
+    async createReward(userId, rewardId, desc, pointsNeeded, errorCallback) {
+        try {
+            const token = this.getTokenOrThrow("Only authenticated users can create rewards.");
+            const response = await this.axiosClient.post('rewards/create', {
+                userId: userId,
+                rewardId: rewardId,
+                desc: desc,
+                pointsNeeded, pointsNeeded
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.rewardModel;
+        } catch (error) {
+            this.handleError(error, errorCallback);
+        }
+    }
 
     /**
      * 
@@ -83,11 +110,7 @@ export default class TaskMasterClient extends BindingClass {
     async deleteTask(userId, id, errorCallback) {
         try {
             const token = this.getTokenOrThrow("Only authenticated users can delete tasks.");
-            const response = await this.axiosClient.delete(`tasks/delete/${userId}/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            const response = await this.axiosClient.delete(`tasks/delete/${userId}/${id}`);
             return response.data.taskModel;
         } catch (error) {
             this.handleError(error, errorCallback);

@@ -29,6 +29,7 @@ module.exports = {
     searchPlaylists: path.resolve(__dirname, 'src', 'pages', 'searchPlaylists.js'),
     createTask: path.resolve(__dirname, 'src', 'pages', 'createTask.js'),
     updateTask: path.resolve(__dirname, 'src', 'pages', 'updateTask.js'),
+    createReward: path.resolve(__dirname, 'src', 'pages', 'createReward.js'),
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),

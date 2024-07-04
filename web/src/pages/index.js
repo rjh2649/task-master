@@ -110,9 +110,6 @@ class Index extends BindingClass {
             if (taskRow) {
                 taskRow.remove();
             }
-
-            // await this.getPendingTasks();
-            // await this.getCompletedTasks();
     }
 
     generateRow(task) {

@@ -77,7 +77,10 @@ public class CreateRewardRequest {
         }
 
         public CreateRewardRequest build() {
-            return new CreateRewardRequest(userId, rewardId, desc, pointsNeeded);
+            System.out.println("Building request...");
+            CreateRewardRequest request = new CreateRewardRequest(userId, rewardId, desc, pointsNeeded);
+            System.out.println(request);
+            return request;
         }
     }
 }

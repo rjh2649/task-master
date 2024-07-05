@@ -30,6 +30,7 @@ module.exports = {
     createTask: path.resolve(__dirname, 'src', 'pages', 'createTask.js'),
     updateTask: path.resolve(__dirname, 'src', 'pages', 'updateTask.js'),
     createReward: path.resolve(__dirname, 'src', 'pages', 'createReward.js'),
+    viewRewards: path.resolve(__dirname, 'src', 'pages', 'viewRewards.js'),
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),

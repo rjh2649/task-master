@@ -17,7 +17,7 @@ export default class TaskMasterClient extends BindingClass {
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout',
                                 'createTask', 'getTasks', 'updateTask', 'deleteTask',
-                                'createReward'];
+                                'createReward', 'getRewards'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -71,6 +71,21 @@ export default class TaskMasterClient extends BindingClass {
         }
 
         return await this.authenticator.getUserToken();
+    }
+
+    async getRewards(userId, errorCallback) {
+        try {
+            const response = await this.axiosClient.get(`rewards/get/${userId}`, {
+                params: {userId}
+            });
+            if (response.data.rewardModels != null) {
+                return response.data.rewardModels;
+            } else {
+                return;
+            }
+        } catch (error) {
+            this.handleError(error, errorCallback);
+        }
     }
 
     /**

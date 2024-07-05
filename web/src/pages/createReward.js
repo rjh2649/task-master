@@ -59,7 +59,7 @@ class CreateReward extends BindingClass {
     async redirectToHome() {
         const reward = this.datastore.get('reward');
         if (reward != null) {
-            window.location.href = "/index.html";
+            window.location.href = "/viewRewards.html";
         }
     }
 }

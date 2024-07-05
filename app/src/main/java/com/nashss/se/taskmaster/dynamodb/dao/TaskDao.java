@@ -63,14 +63,17 @@ public class TaskDao {
         String keyConditionExpressionFormat = "user_ID = :userId AND (%s)";
         String statusFormat = "#s = %s";
         String status = ":s";
+
         for (int i = 0; i < statuses.length; i++) {
             statusFormat = String.format(statusFormat, (status + i));
             valueMap.put(status + i, new AttributeValue().withS(statuses[i]));
+
             if (i > 1) {
                 statusFormat += " OR #s = :s" + (i + 1);
-            }
-            nameMap.put("#s", "status"); 
+            }             
         }
+        
+        nameMap.put("#s", "status");
         valueMap.put(":userId", new AttributeValue().withS(userId));
 
         String keyConditionExpression = 

@@ -38,18 +38,38 @@ class Index extends BindingClass {
         errorMessage.classList.add('hidden');
 
         const userId = (await this.auth.getCurrentUserInfo()).email;
-        const status = "NOT_STARTED";
+        const pending = "PENDING";
+        const notStarted = "NOT_STARTED";
 
-        const pendingTasks = await this.client.getTasks(userId, status, (error) => {
+        const notStartedTasks = await this.client.getTasks(userId, notStarted, (error) => {
+            errorMessage.innerText = `Error: ${error.message}`;
+            errorMessage.classList.remove('hidden');
+        });
+        
+        this.dataStore.set('notStarted-tasks', notStartedTasks);
+
+        const pendingTasks = await this.client.getTasks(userId, pending, (error) => {
             errorMessage.innerText = `Error: ${error.message}`;
             errorMessage.classList.remove('hidden');
         });
 
         this.dataStore.set('pending-tasks', pendingTasks);
 
+        const rows = [];
+
         const tableBody = document.getElementById('current-task-table-body');
+
+        notStartedTasks.forEach(task => {
+            const row = this.generateRow(task);
+            rows.push(row);
+        });
+
         pendingTasks.forEach(task => {
             const row = this.generateRow(task);
+            rows.push(row);
+        });
+
+        rows.forEach(row => {
             tableBody.insertAdjacentHTML('beforeend', row);
         });
     }
